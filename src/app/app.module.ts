@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { MyApp } from './app.component';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 import { AuthPage } from '../pages/auth/auth';
@@ -26,6 +27,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { ProfilePage, EditProfile } from '../pages/profile/profile';
 import { FeedbackPage } from '../pages/feedback/feedback';
 
+import { SubscribeService } from '../providers/subscribe-service';
 import { Subsstep1Page } from '../pages/subscribe/subscribe';
 import { Subsstep2Page } from '../pages/subscribe/subsstep2';
 import { Subsstep3Page } from '../pages/subscribe/subsstep3';
@@ -71,6 +73,7 @@ const cloudSettings: CloudSettings = {
     HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     CloudModule.forRoot(cloudSettings),
   ],
   bootstrap: [IonicApp],
@@ -90,6 +93,8 @@ const cloudSettings: CloudSettings = {
     Push,
     InAppBrowser,
     Mixpanel,MixpanelPeople,
+    Storage,
+    SubscribeService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -7,10 +7,10 @@
 <ion-content>
     <ion-card *ngFor="let menu of data; let m = index" text-wrap no-padding>
         <ion-row no-padding>
-            <ion-col width-33>
+            <ion-col col-5>
                 <img src="https://bgmenu.kilatstorage.com/{{menu.menu_id}}.jpg" />
             </ion-col>
-            <ion-col>
+            <ion-col col-7>
                 <ion-row>
                     <div class="menu_tag" *ngIf="menu.menu_type == 3 || menu.menu_type == 5">MENU UTAMA</div>
                     <div class="menu_tag" *ngIf="menu.menu_type != 3 && menu.menu_type != 5">MENU LAIN-LAIN</div>
@@ -22,7 +22,7 @@
         </ion-row>
         <div no-padding class="price_cont">
           <ion-row>
-              <ion-col width-66 style="background-color:#f5f5f5">
+              <ion-col col-9 style="background-color:#f5f5f5">
                   <div class="portion">
                       <span>Porsi</span><br/>
                       {{menu.portion}} Orang
@@ -36,7 +36,7 @@
                   <button clear [disabled]="menu.qty == 0" (click)="update(m,0)">
                     <ion-icon name="remove"></ion-icon></button>
               </ion-col>
-              <ion-col width-10 class="qty">
+              <ion-col class="qty">
                   {{menu.qty}}
               </ion-col>
               <ion-col class="btnz">
