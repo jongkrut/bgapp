@@ -1,0 +1,103 @@
+edit-order {
+  ion-card {
+    background-color: #fff !important;
+  }
+  .cart_item {
+    text-align:left;
+    padding:0 !important;
+  }
+  table {
+    width:100%;
+    color:#2f2f2f;
+    margin-top:4px;
+    border-collapse: collapse;
+  }
+  th{
+    font-size:75%;
+    color:#2f2f2f;
+    font-weight:normal;
+  }
+  td {
+    border:1px solid #bfbfbf;
+    text-align: center;
+  }
+  .ttl_price {
+    float: right;
+    color:#2f2f2f;
+    font-size:110%;
+  }
+  .tblright {
+    float:right;
+  }
+  .menu_name {
+    font-size:14px;
+  }
+  .menu_tag {
+    font-size:10px;
+    margin-bottom:3px;
+    font-weight:300;
+  }
+  .portion {
+    font-size:12px;
+    border-right:1px solid #bfbfbf;
+    float:left;
+    width:50%;
+  }
+  .portion span {
+    font-size:10px;
+  }
+  .price{
+    font-size:12px;
+    padding-left:10px;
+    float:left;
+    width:50%;
+  }
+  .price span {
+    font-size:10px;
+  }
+
+  ion-col.qty {
+    text-align:center;
+    line-height:30px;
+    background-color: #f5f5f5;
+    font-size:105%;
+  }
+  .btnz {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  .btnz button{
+    color:#444;
+    background-color: #fff;
+    padding:3px;
+    width:20px;
+  }
+
+  .price_cont {
+    border-top:1px solid rgba(191,191,191,0.3);
+    padding:5px !important;
+  }
+
+  .box_qty {
+    float:left;
+    padding-left:5px;
+    padding-right:10px;
+    border-right:1px solid #bfbfbf;
+  }
+  .box_qty span {
+    font-size:75%;
+    font-weight:300;
+  }
+  .box_price {
+    float:left;
+    padding-left:10px;
+  }
+  .box_price span {
+    font-size:75%;
+    font-weight:300;
+  }
+
+  $badge-font-size : 1rem;
+
+}

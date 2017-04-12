@@ -1,0 +1,49 @@
+page-substhanks {
+
+  .thanks_ttl {
+    text-align: center;
+    font-size:36px;
+    color:#03c9a9;
+    font-weight:300;
+    margin:5px 0;
+  }
+  .thanks_ttl div {
+    font-size:14px;
+    color:#666;
+    line-height:20px !important;
+    margin-top:2px;
+  }
+
+  .del_date {
+    color:#03c9a9;
+    text-align: center;
+    text-decoration: underline;
+    margin:10px 0;
+    font-size:18px;
+  }
+
+  .thx_up {
+    margin-top: 10px;
+    color:#999;
+    line-height:20px;
+    font-weight:300;
+  }
+
+  .thx_btm {
+    margin-bottom: 40px;
+    color:#999;
+    line-height:20px;
+    font-weight:300;
+  }
+
+  ion-col {
+    font-size:12px;
+    color:#666;
+    font-weight:300;
+  }
+
+  .tabbar{
+    opacity: 1;
+
+  }
+}

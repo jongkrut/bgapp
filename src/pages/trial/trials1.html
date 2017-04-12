@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Mulai Pesan Trial Box</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="subsStep1()" #subscribeForm="ngForm">
+
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label stacked>Area pengiriman anda:</ion-label>
+          <ion-select name="city" [(ngModel)]="subscribeStep1.city" required placeholder="Pilih area pengiriman anda" (ionChange)="step1check.check2=true">
+            <ion-option value="1">Jakarta Pusat</ion-option>
+            <ion-option value="2">Jakarta Selatan</ion-option>
+            <ion-option value="3">Jakarta Barat</ion-option>
+            <ion-option value="4">Jakarta Utara</ion-option>
+            <ion-option value="5">Jakarta Timur</ion-option>
+            <ion-option value="6">Tangerang</ion-option>
+            <ion-option value="7">Bekasi Kota</ion-option>
+            <ion-option value="8">Tangerang Selatan</ion-option>
+            <ion-option value="9">Depok</ion-option>
+            <ion-option value="10">Bogor</ion-option>
+            <ion-option value="11">Tambun</ion-option>
+            <ion-option value="12">Cikarang</ion-option>
+          </ion-select>
+        </ion-item>
+        <p padding>
+          <span>Apa itu area pengiriman?</span><br/> Area lingkup pengiriman yang dilayani BlackGarlic saat ini. Terdiri dari 12 kota di Jakarta dan sekitarnya.</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="step1check.check2">
+      <ion-card-content>
+        <ion-item>
+          <ion-label stacked>Hari pengiriman pertama Anda:</ion-label>
+          <ion-select name="delivery_date" [(ngModel)]="subscribeStep1.delivery_date" required placeholder="Pilih hari pengiriman anda" (ionChange)="selectDays()">
+            <ion-option *ngIf="thisWeek.length>0" disabled value="0">Minggu Ini</ion-option>
+            <ion-option *ngFor="let dayThisWeek of thisWeek" value={{dayThisWeek.date}}>{{dayThisWeek.dateFormat}}</ion-option>
+            <ion-option disabled value="0">Minggu Depan</ion-option>
+            <ion-option *ngFor="let dayNextWeek of nextWeek" value={{dayNextWeek.date}}>{{dayNextWeek.dateFormat}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <p padding>
+          <span>Apa itu hari pengiriman?</span><br/> Hari pengiriman Anda adalah <strong>{{selectedDate}}</strong>.</p>
+      </ion-card-content>
+    </ion-card>
+
+    <div padding>
+      <button ion-button class="submit-btn" color="greenbg" full type="submit" [disabled]="!subscribeForm.form.valid && subscribeForm.form.dirty" *ngIf="step1check.check2">Next</button>
+    </div>
+
+  </form>
+</ion-content>

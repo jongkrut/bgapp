@@ -1,0 +1,43 @@
+page-subsstepsummarytrial {
+  .carddtl {
+    margin-bottom:25px !important;
+  }
+  ion-item {
+    background-color: #fff !important;
+  }
+  ion-item h5 {
+    font-size:1.2rem !important;
+    color:#666 !important;
+  }
+  ion-item p {
+    color:#222 !important;
+  }
+  .menu {
+    background-color: #fff;
+    font-size:12px;
+  }
+  .menu_name {
+    font-size:13px;
+    margin-bottom: 5px;
+    color:#222;
+  }
+  .menu_desc {
+    font-size:12px;
+    color:#666;
+  }
+  table {
+    background-color:#fff;
+    color:#444;
+    font-size:1.2rem;
+    width:100%;
+  }
+  th {
+    vertical-align:top;
+    text-align:left;
+    padding:10px;
+  }
+  td {
+    vertical-align:top;
+      padding:10px;
+  }
+}

@@ -1,0 +1,48 @@
+.title-ios { padding:0 5px !important}
+
+page-menu {
+  ul{
+   list-style-type: none;
+   padding-left:0;
+  }
+  ul li {
+    margin-bottom:10px;
+    padding:5px;
+    background-color:#fff;
+  }
+  .menu_text_cont {
+    padding:10px 10px 5px;
+    color:#999;
+  }
+  .menu_tags {
+      color:#848484;
+      font-size:1rem;
+      margin-bottom:5px;
+  }
+
+  ion-col {
+    color:#444;
+    font-weight:500;
+    font-size:1.2rem;
+
+  }
+
+  .week_txt {
+    width:100%;
+    text-align: center;
+    color:#999;
+    margin-bottom:10px;
+    line-height:25px;
+    font-size:1.2rem;
+  }
+  .week_txt span {
+    color:#666;
+    font-weight:500;
+    font-size:18px;
+  }
+
+  $segment-button-md-opacity: 0.3 !important;
+  $segment-button-md-opacity-activated: 1;
+
+
+}

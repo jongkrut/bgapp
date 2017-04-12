@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <img src="assets/logoheader.png" style="height:auto;width:25px;float:left;margin-right:5px"/>
+      <div style="float:right">
+        Kirim Feedback
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-header text-wrap>
+      Bagaimana kami dapat membantu anda?
+    </ion-card-header>
+    <ion-card-content>
+      <form (ngSubmit)="sendFeedback()" #feedbackForm="ngForm" novalidate>
+          <ion-textarea placeholder="Silahkan ketik masalah Anda disini" name="content" [(ngModel)]="feedback.content" required>
+          </ion-textarea>
+          <button ion-button block type="submit" color="greenbg" [disabled]="!feedbackForm.form.valid">Kirim</button>
+      </form>
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

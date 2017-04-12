@@ -1,0 +1,69 @@
+page-howitworks {
+
+  .sect1 {
+    color:#666;
+    float:left;
+    width:100%;
+  }
+  .sect1_txt {
+    line-height:2rem;
+    margin-top:30px;
+  }
+
+  .sect2{
+    background-color: #fff;
+    color:#666;
+    float:left;
+    width:100%;
+  }
+  .sect2_txt {
+    line-height:2rem;
+    margin-top:30px;
+  }
+
+  .sect3 {  float:left;
+    width:100%;
+
+    color:#666;
+  }
+  .sect3_txt {
+    line-height:2rem;
+    margin-top:30px;
+  }
+
+  .sect4{
+    float:left;
+    width:100%;
+    background-color: #fff;
+    color:#666;
+  }
+  .sect4_txt {
+    line-height:2rem;
+    margin-top:30px;
+  }
+
+  .img_cont {
+    margin:20px 0;
+  }
+  .img_cont_2 {
+    margin:10px 0 20px;
+  }
+
+  .sect5 {
+    float:left;
+    width:100%;
+    background-color: #03c9a9;
+  }
+
+  ion-card-header {
+    color:#00584a !important;
+    font-size:1.4rem !important;
+  }
+
+  ul {
+    color:#00584a;
+    font-weight:300;
+    padding-left:20px;
+    font-size:1.3rem;
+  }
+}

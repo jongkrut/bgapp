@@ -1,0 +1,124 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <img src="assets/logoheader.png" style="height:auto;width:25px;float:left;margin-right:5px"/>
+      <div style="float:right">
+        Cara Kerja
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div padding class="sect1">
+    <h2>Apa Itu BlackGarlic?</h2>
+    <div class="sect1_txt">
+      BlackGarlic adalah layanan pengiriman bahan makanan segar siap masak.
+      <br/><br/>
+      Seluruh bahan makanan dikemas dan ditakar sesuai porsi sehingga tidak ada yang tersisa.
+      <br/><br/>
+      Setiap menu BlackGarlic merupakan kreasi Chef profesional serta tidak menggunakan pengawet makanan dan tambahan MSG.
+    </div>
+    <div class="img_cont">
+      <img src="assets/how/a_1.jpg" style="float:left;width:80%;z-index:0"/>
+      <img src="assets/how/a_2.jpg" style="float:right;z-index:1;width:80%;margin-top:-30px"/>
+    </div>
+  </div>
+
+  <div padding class="sect2">
+      <h2>Semua bisa masak,<br/>
+          tanpa terkecuali</h2>
+
+      <div class="sect2_txt">
+        Setiap menu dijamin praktis, Anda yang tidak pernah memasak sekalipun akan mampu menghidangkan masakan enak dengan BlackGarlic.
+        <br/>
+        <br/>
+        Tidak ada lagi mengantri di kasir supermarket, seluruh bahan baku sudah disiapkan, ditakar dan dibungkus. Anda tinggal masak!
+      </div>
+
+      <button ion-button small (click)="openModalHow()" color="greenbg">LIHAT CARANYA >></button>
+
+      <div class="img_cont_2">
+        <img src="assets/how/b_1.jpg" style="float:left;width:80%;z-index:0"/>
+        <img src="assets/how/b_2.jpg" style="float:right;z-index:1;width:80%;margin-top:-30px"/>
+      </div>
+  </div>
+
+  <div padding class="sect3">
+      <h2>Menu Favorit,<br/>
+        pilihan keluarga</h2>
+
+      <div class="sect3_txt">
+        Ayah suka Sop Buntut, anak suka Chicken Steak, Anda suka Bibimbap? Dengan BlackGarlic Anda bisa memasak semuanya!<br/>
+        <br/>
+        Dengan BlackGarlic, Anda semakin punya banyak waktu untuk keluarga. Makan enak dan keluarga makin mesra!
+      </div>
+      <div class="img_cont">
+        <img src="assets/how/c_1.jpg" style="float:left;width:80%;z-index:0"/>
+        <img src="assets/how/c_2.jpg" style="float:right;z-index:1;width:80%;margin-top:-30px"/>
+      </div>
+  </div>
+
+  <div padding class="sect4">
+    <h2>Resep dan bahan,<br/>
+        sudah teruji
+    </h2>
+
+    <div class="sect4_txt">
+      Demi memberikan yang terbaik, setiap menu BlackGarlic harus melalui serangkaian proses pengujian yang diawasi oleh pakar kuliner Indonesia, William Wongso.
+      <br /><br />
+      Tidak pernah ada kata bosan memasak dengan BlackGarlic. Setiap minggunya ada 11 menu baru kreasi Chef profesional tanpa pengawet makanan dan tambahan MSG yang bisa Anda pesan.
+    </div>
+
+    <button ion-button small (click)="openModalWhy()" color="greenbg">Mengapa Memasak dengan Kami >></button>
+
+    <div class="img_cont_2">
+      <img src="assets/how/d_1.jpg" style="float:left;width:80%;z-index:0"/>
+      <img src="assets/how/d_2.jpg" style="float:right;z-index:1;width:80%;margin-top:-30px"/>
+    </div>
+  </div>
+
+  <div padding class="sect5">
+
+    <div style="text-align:center;color:#666;font-size:1.8rem;font-weight:300">
+      Mulai Memasak Dengan BlackGarlic
+    </div>
+
+    <ion-card>
+      <ion-card-header>
+        RENCANA BERLANGGANAN
+      </ion-card-header>
+      <ion-card-content>
+        <ul>
+          <li>1 Box tiap minggu</li>
+          <li>Skip pengiriman kapan saja</li>
+          <li>Stop berlangganan kapan saja</li>
+          <li>Min 2 menu dan IDR 150.000</li>
+          <li>Tanpa ongkos kirim</li>
+          <li>Disokn 20% Box pertama</li>
+        </ul>
+        <button ion-button block round small color="greenbg" (click)="goReg(1)">Mulai Berlangganan</button>
+      </ion-card-content>
+    </ion-card>
+
+    <div style="text-align:center;color:#fafafa;font-size:1.4rem;font-weight:300">
+      atau
+    </div>
+
+    <ion-card>
+      <ion-card-header>
+        TRIAL BOX
+      </ion-card-header>
+      <ion-card-content>
+        <ul>
+          <li>1 Box tanpa berlangganan</li>
+          <li>Min 2 menu dan IDR 150.000</li>
+          <li>Ongkos kirim IDR 20.000</li>
+        </ul>
+          <button ion-button block round small color="greenbg" (click)="goReg(2)">Coba Sekali</button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

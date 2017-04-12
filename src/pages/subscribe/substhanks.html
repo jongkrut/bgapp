@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Konfirmasi</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div class="thanks_ttl" padding-horizontal>
+    Terima Kasih
+    <div>telah bergabung dengan Rencana Berlangganan BlackGarlic</div>
+  </div>
+
+  <img src="assets/reg/thxbox.png" />
+
+  <div class="thx_up" padding-horizontal>
+    Box berlangganan pertama Anda akan dikirimkan pada:
+  </div>
+
+  <div class="del_date">
+        {{delivery_date}}
+  </div>
+
+
+  <div class="thx_btm" padding-horizontal>
+    Pastikan SaldoBG Anda cukup sebelum kami debit secara otomatis di tanggal {{pay_date}} pukul 15:00.
+  </div>
+
+  <div style="position:relative;height:140px">
+    <ion-row no-padding>
+      <ion-col width-25 style="text-align:center">
+        Lihat<br/>Menu<br/>disini<br/><br/>
+        <ion-icon name="arrow-down"></ion-icon>
+      </ion-col>
+      <ion-col width-25 style="text-align:center">
+        Atur<br/> Langganan<br/> disini<br/><br/>
+        <ion-icon name="arrow-down"></ion-icon>
+      </ion-col>
+      <ion-col width-25 style="text-align:center">
+        Semua<br/> tentang<br/> SaldoBG<br/><br/>
+        <ion-icon name="arrow-down"></ion-icon>
+      </ion-col>
+      <ion-col width-25 style="text-align:center">
+        Atur<br/> Profil<br/> disini<br/><br/>
+        <ion-icon name="arrow-down"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-tabs selectedIndex="-1">
+      <ion-tab tabTitle="Menu" tabIcon="list-box" (ionSelect)="select(0)"></ion-tab>
+      <ion-tab tabTitle="Langganan" tabIcon="settings"  (ionSelect)="select(1)"></ion-tab>
+      <ion-tab tabTitle="SaldoBG" tabIcon="cash"  (ionSelect)="select(2)"></ion-tab>
+      <ion-tab tabTitle="Profil" tabIcon="contact"  (ionSelect)="select(3)"></ion-tab>
+    </ion-tabs>
+  </div>
+
+</ion-content>

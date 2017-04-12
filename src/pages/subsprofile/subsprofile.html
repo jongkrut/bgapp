@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Profil Langganan</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list>
+      <ion-list-header>
+        <span style="color:#03c9a9">Rencana Berlangganan</span>
+        <button ion-button outline item-right (click)="editProfile()" color="darkbg">
+          Edit
+        </button>
+      </ion-list-header>
+      <button ion-item [disabled]="!subscriptionStatus">
+        <h3>Hari Pengiriman</h3>
+        <p *ngIf="subscription.delivery_day==1">Senin</p>
+        <p *ngIf="subscription.delivery_day==2">Selasa</p>
+        <p *ngIf="subscription.delivery_day==3">Rabu</p>
+        <p *ngIf="subscription.delivery_day==4">Kamis</p>
+        <p *ngIf="subscription.delivery_day==5">Jumat</p>
+        <p *ngIf="subscription.delivery_day==6">Sabtu</p>
+      </button>
+      <button ion-item [disabled]="!subscriptionStatus">
+        <h3>Jumlah Menu per Pengiriman</h3>
+        <p>{{subscription.menu_total}} Menu</p>
+      </button>
+      <button ion-item [disabled]="!subscriptionStatus">
+        <h3>Porsi per Menu</h3>
+        <p>Porsi {{subscription.portion}} Orang</p>
+      </button>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+          <span style="color:#03c9a9">Alamat Pengantaran</span>
+          <button ion-button outline item-right (click)="editAddress()" color="darkbg">
+            Edit
+          </button>
+      </ion-list-header>
+      <button ion-item >
+        <h3>Nama Penerima</h3>
+        <p>{{subscription.customer_name}}</p>
+      </button>
+      <button ion-item>
+        <h3>Alamat Lengkap</h3>
+        <p>{{subscription.address_content}}</p>
+      </button>
+      <button ion-item>
+        <h3>Kota</h3>
+        <p *ngIf="subscription.city==1">Jakarta Pusat</p>
+        <p *ngIf="subscription.city==2">Jakarta Selatan</p>
+        <p *ngIf="subscription.city==3">Jakarta Barat</p>
+        <p *ngIf="subscription.city==4">Jakarta Utara</p>
+        <p *ngIf="subscription.city==5">Jakarta Timur</p>
+        <p *ngIf="subscription.city==6">Tangerang</p>
+        <p *ngIf="subscription.city==7">Bekasi Kota</p>
+        <p *ngIf="subscription.city==8">Tangerang Selatan</p>
+        <p *ngIf="subscription.city==9">Depok</p>
+        <p *ngIf="subscription.city==10">Bogor</p>
+        <p *ngIf="subscription.city==11">Tambun</p>
+        <p *ngIf="subscription.city==12">Cikarang</p>
+      </button>
+      <button ion-item>
+        <h3>Kode Pos</h3>
+        <p>{{subscription.zipcode}}</p>
+      </button>
+      <button ion-item>
+        <h3>Telepon</h3>
+        <p>{{subscription.mobile}}</p>
+      </button>
+      <button ion-item>
+        <h3>Catatan Pengantaran</h3>
+        <p>{{subscription.address_notes}}</p>
+      </button>
+    </ion-list>
+
+    <div padding>
+      <button ion-button block padding (click)="pauseSubscription(2)" *ngIf="subscriptionStatus==true" color="danger" clear>Stop Langganan</button>
+      <button ion-button block padding (click)="pauseSubscription(1)" *ngIf="subscriptionStatus==false" color="secondary" clear>Lanjutkan Langganan</button>
+    </div>
+
+</ion-content>

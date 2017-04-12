@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Alamat Pengiriman</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <form (ngSubmit)="subsStep2()" #subsStep2Form="ngForm" novalidate>
+    <ion-row>
+         <ion-col>
+           <ion-list inset>
+             <ion-item>
+               <ion-label stacked>Nama Penerima</ion-label>
+               <ion-input type="text" name="customer_name" [(ngModel)]="subsUserData.customer_name" required></ion-input>
+             </ion-item>
+             <ion-item>
+               <ion-label stacked>Alamat Lengkap</ion-label>
+               <ion-textarea name="address_content" [(ngModel)]="subsUserData.address_content" required></ion-textarea>
+             </ion-item>
+             <ion-item>
+               <ion-label  stacked>Kode Pos</ion-label>
+               <ion-input type="text" name="zipcode" [(ngModel)]="subsUserData.zipcode" required></ion-input>
+             </ion-item>
+             <ion-item>
+               <ion-label stacked>Nomor Telpon</ion-label>
+               <ion-input type="text" name="mobile" [(ngModel)]="subsUserData.mobile" required></ion-input>
+             </ion-item>
+             <ion-item>
+               <ion-label stacked>Patokan</ion-label>
+               <ion-textarea name="address_notes" [(ngModel)]="subsUserData.address_notes" required></ion-textarea>
+             </ion-item>
+           </ion-list>
+         </ion-col>
+       </ion-row>
+
+       <ion-row>
+         <ion-col class="subscribe-col">
+           <button ion-button class="submit-btn" full type="submit" [disabled]="!subsStep2Form.form.valid" color="greenbg">Next</button>
+         </ion-col>
+       </ion-row>
+  </form>
+</ion-content>

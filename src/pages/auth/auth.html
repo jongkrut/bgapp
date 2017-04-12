@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <img src="assets/logoheader.png" style="height:auto;width:25px;float:left;"/>
+      <div style="float:right">Login</div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+        <button ion-button block icon-left (click)="loginFB()" style="background-color:#3b5998;color:#fff">
+            <img src="assets/fbsignin.png" style="position:absolute;left:14px;height:2.2rem;width:auto;top:50%;transform:translateY(-50%)" />
+            Login dengan Facebook
+        </button>
+
+        <button ion-button block icon-left (click)="loginGoogle()" style="background-color:#fff;color:#666;margin-top:10px">
+            <img src="assets/googlesignin.png" style="position:absolute;left:10px;height:3rem;width:auto;top:50%;transform:translateY(-50%)" />
+            Login dengan Google
+        </button>
+
+        <div padding-horizontal style="position:relative;margin:30px 0 50px;">
+          <span class="abs">atau</span>
+          <div class="notch">
+          </div>
+        </div>
+
+        <form #loginfrm="ngForm" (ngSubmit)="loginSubmit()" novalidate>
+            <ion-list>
+              <ion-item style="padding-left:0">
+                <ion-label stacked>Email Address</ion-label>
+                <ion-input type="email" placeholder="Alamat Email" name="email" #email="ngModel" [(ngModel)]="loginInfo.email" required></ion-input>
+              </ion-item>
+
+              <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                EMAIL REQUIRED
+              </div>
+
+              <ion-item style="padding-left:0">
+                <ion-label stacked>Password</ion-label>
+                <ion-input type="password" placeholder="Password" name="passwd" #passwd="ngModel" [(ngModel)]="loginInfo.password" required></ion-input>
+              </ion-item>
+
+              <button type="submit" class="btnlogin" ion-button block disabled [disabled]="loginfrm.form.invalid" color="darkbg">LOGIN</button>
+
+            </ion-list>
+        </form>
+</ion-content>

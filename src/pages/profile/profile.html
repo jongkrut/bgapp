@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+
+    <ion-title>Akun Saya</ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
+  <div class="div_addr">
+    Profile
+    <button ion-button outline item-right color="primary" (click)="editProfile()" small color="darkbg">Edit</button>
+  </div>
+
+  <ion-list inset>
+    <button ion-item>
+      <h3>Name Depan</h3>
+      <p>{{ detail.first_name}}</p>
+    </button>
+    <button ion-item>
+      <h3>Name Belakang</h3>
+      <p>{{ detail.last_name}}</p>
+    </button>
+    <button ion-item>
+      <h3>Email</h3>
+      <p>{{ detail.customer_email}}</p>
+    </button>
+    <ion-item *ngIf="detail.customer_code  != ''">
+      <h3>Referral Code</h3>
+      <p>{{ detail.customer_code}}</p>
+      <button ion-button round item-right (click)="shareCode()" color="greenbg">Share</button>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

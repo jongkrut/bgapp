@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <img src="assets/logoheader.png" style="height:auto;width:25px;float:left;"/>
+      <div style="float:right">
+        BlackGarlic
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-tabs #myTabs>
+  <ion-tab [root]="tab1Root" tabTitle="Menu" tabIcon="list-box"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="{{tab2Title}}" tabIcon="settings"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="SaldoBG" tabIcon="cash"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="Profil" tabIcon="contact"></ion-tab>
+</ion-tabs>

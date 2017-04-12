@@ -1,0 +1,210 @@
+<!--
+  Generated template for the SubscribeStep1 page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Ulasan Pemesanan
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-list-header>
+      Ulasan Pemesanan Trial Box
+    </ion-list-header>
+  </ion-list>
+
+  <ion-card class="carddtl">
+    <ion-item>
+      <h5>Hari Pengiriman
+      <!-- <p *ngIf="subscribe.step1.delivery_day==1">Senin</p>
+      <p *ngIf="subscribe.step1.delivery_day==2">Selasa</p>
+      <p *ngIf="subscribe.step1.delivery_day==3">Rabu</p>
+      <p *ngIf="subscribe.step1.delivery_day==4">Kamis</p>
+      <p *ngIf="subscribe.step1.delivery_day==5">Jumat</p>
+      <p *ngIf="subscribe.step1.delivery_day==6">Sabtu</p> -->
+      <span style="float:right">{{date}}</span>
+      </h5>
+      <!-- <p>{{date}}</p> -->
+    </ion-item>
+    <!-- <ion-item>
+      <h5>Jumlah Menu per Pengiriman</h5>
+      <p>{{total}} menu</p>
+    </ion-item> -->
+    <!-- <ion-item>
+      <h5>Porsi per Menu</h5>
+      <p>{{subscribe.step1.portion}} orang</p>
+    </ion-item> -->
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header>
+      Alamat Pengiriman
+    </ion-list-header>
+  </ion-list>
+  <ion-card class="carddtl">
+    <table>
+      <tr>
+        <th>Nama Penerima</th>
+        <td>{{subscribe.step2.customer_name}}</td>
+      </tr>
+      <tr>
+        <th>Alamat Lengkap</th>
+        <td>{{subscribe.step2.address_content}}</td>
+      </tr>
+      <tr>
+        <th>Kota</th>
+        <td *ngIf="subscribe.step1.city==1">Jakarta Pusat</td>
+        <td *ngIf="subscribe.step1.city==2">Jakarta Selatan</td>
+        <td *ngIf="subscribe.step1.city==3">Jakarta Barat</td>
+        <td *ngIf="subscribe.step1.city==4">Jakarta Utara</td>
+        <td *ngIf="subscribe.step1.city==5">Jakarta Timur</td>
+        <td *ngIf="subscribe.step1.city==6">Tangerang</td>
+        <td *ngIf="subscribe.step1.city==7">Bekasi Kota</td>
+        <td *ngIf="subscribe.step1.city==8">Tangerang Selatan</td>
+        <td *ngIf="subscribe.step1.city==9">Depok</td>
+        <td *ngIf="subscribe.step1.city==10">Bogor</td>
+        <td *ngIf="subscribe.step1.city==11">Tambun</td>
+        <td *ngIf="subscribe.step1.city==12">Cikarang</td>
+      </tr>
+      <tr>
+        <th>Kode Pos</th>
+        <td>{{subscribe.step2.zipcode}}</td>
+      </tr>
+      <tr>
+        <th>Telepon</th>
+        <td>{{subscribe.step2.mobile}}</td>
+      </tr>
+      <tr>
+        <th>Catatan Pengantaran</th>
+        <td>{{subscribe.step2.address_notes}}</td>
+      </tr>
+    </table>
+
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header>
+      Menu Trial Box
+    </ion-list-header>
+  </ion-list>
+  <ion-card>
+    <div class="menu" style="padding:5px 10px">
+      Jumlah Menu
+      <span style="float:right">{{total_menu}} menu</span>
+    </div>
+  </ion-card>
+
+  <ion-card *ngFor="let menu of cart; let m = index" class="cart_item" text-wrap class="menu">
+    <ion-row>
+      <ion-col width-33 style="padding:5px">
+        <img src="https://bgmenu.kilatstorage.com/{{menu.menu_id}}.jpg" />
+      </ion-col>
+      <ion-col width-67 style="padding:5px">
+        <div class="menu_name">{{menu.menu_name}}</div>
+        <div class="menu_detail">Porsi {{menu.portion}} Orang - IDR  {{menu.menu_price | number : '1.0-0'}} <br> Jumlah : {{menu.qty}}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card>
+    <div class="menu" style="padding:10px 10px">
+      Total Pembelian
+      <span style="float:right">
+      IDR {{subscribe.cartDetail.total_harga | number : '1.0-0'}}</span><br> Ongkos Kirim
+      <span style="float:right">
+      IDR 20.000</span><br>
+    </div>
+  </ion-card>
+  <ion-card>
+    <div class="menu" style="padding:10px 10px">
+      <b>Total Pembayaran
+      <span style="float:right">
+      IDR {{subscribe.cartDetail.total | number : '1.0-0'}}
+    </span></b>
+    </div>
+  </ion-card>
+
+  <ion-list radio-group name="payment_method" [(ngModel)]="payment_method" required>
+    <ion-list-header>
+      Metode Pembayaran
+    </ion-list-header>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label style="font-size:12px;">Bank Transfer</ion-label>
+          <ion-radio (click)="check($event)" value="va"></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+            <ion-label style="font-size:12px;">Kartu Kredit Online</ion-label>
+          <ion-radio (click)="check($event)" value="credit_card"></ion-radio>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <div class="topup" padding *ngIf="payment_method=='va'">
+    <ion-list>
+      <ion-list-header style="color:#03c9a9">
+      Bank Transfer
+      </ion-list-header>
+      <ion-item text-wrap>
+      Anda dapat transfer ke rekening Virtual Account BCA atau Bank Permata.
+      </ion-item>
+      <ion-item text-wrap>
+      Anda dapat melakukan transfer menggunakan ATM Bersama melalui Bank Permata.
+      </ion-item>
+      <ion-item text-wrap>
+      Anda tidak perlu lagi mengkonfirmasi pembayaran anda. Semua akan dicek oleh sistem kami secara otomatis maksimal 3-5 menit.
+      </ion-item>
+      <ion-item text-wrap>
+      Nomor Virtual Account pesanan Anda dapat dilihat di halaman 'Info Trial'.
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="topup" padding *ngIf="payment_method=='credit_card'">
+    <ion-list>
+      <ion-list-header style="color:#03c9a9">
+      Kartu Kredit Online
+      </ion-list-header>
+      <ion-item text-wrap>
+      Kami dapat menerima semua kartu kredit berlogo Visa / MasterCard.
+      </ion-item>
+      <ion-item text-wrap>
+      Setelah menyelesaikan transaksi di BlackGarlic, Anda akan secara otomatis dibawa ke halaman pembayaran kartu kredit yang dikelola oleh DOKU.
+      </ion-item>
+      <ion-item text-wrap>
+      Anda tidak perlu lagi mengkonfirmasi pembayaran anda. Semua akan dicek oleh sistem kami secara otomatis.
+      </ion-item>
+      <ion-item text-wrap>
+      Anda dapat mencoba ulang pembayaran anda di halaman 'Info Trial'.
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-card style="margin-top:25px">
+    <ion-item text-wrap>
+      <ion-checkbox (click)="approval()" name="checked" [(ngModel)]="checked" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+      <ion-label text-wrap style="font-size:1.2rem">
+          Dengan ini, Saya menyetujui segala ketentuan pembelian Trial Box di BlackGarlic
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <div padding>
+    <button ion-button class="submit-btn" full type="submit" (click)="subsSummary()" [disabled]="buttonOrder" color="greenbg">
+         ORDER
+      </button>
+  </div>
+</ion-content>

@@ -1,0 +1,197 @@
+page-subsorder {
+  ion-content {
+
+  }
+  ion-card {
+    text-align:center;
+    color:#999;
+    position: relative;
+    background-color: #fff !important;
+  }
+
+  .placeholder {
+      color:#2f2f2f;
+      text-align:center;
+      width:100%;
+  }
+
+  .order_id {
+    position:absolute;
+    left:4px;
+    top:4px;
+    font-size:80%;
+  }
+  .order_status {
+    position:absolute;
+    right:4px;
+    top:4px;
+    font-size:80%;
+  }
+
+  .upper_cont {
+    background-color: #00caab;
+    width:100%;
+    float:left;
+    margin-top:10px;
+  }
+
+
+  .output_hdr {
+      text-align: left;
+      color:#666;
+      font-size:12px;
+      font-weight:300;
+      background-color:rgba(255,255,255,0.9);
+      float:left;
+      width:100%;
+      border-radius:4px;
+      position: relative;
+  }
+
+  .output_txt {
+    font-weight:700;
+    font-size:16px;
+  }
+
+  .outtext_1 {
+    margin-top:5px;
+    font-size:16px;
+  }
+
+  .outtext_2 {
+    margin-top:5px;
+    font-size:22px;
+  }
+  .outtext_3 {
+    margin-top:5px;
+    font-size:18px;
+  }
+
+  .saldobg {
+    margin-top:10px;
+    border:1px solid #ccc;
+    width:100%;float:left;
+    padding:10px;
+    position: relative;
+    border-radius:4px;
+  }
+
+  .paydate {
+    color:white !important;
+    text-align: left;
+    line-height:normal;
+    background-color:#272727;
+    border-radius: 4px;
+    margin-top:2px;
+  }
+
+  .payment_method {
+    font-size:1.2rem;
+    text-align: left;
+    color:#666;
+    background-color:rgba(255,255,255,0.9);
+    float:left;
+    width:100%;
+    border-radius:4px;
+    position: relative;
+  }
+
+  .changedate {
+    text-align: left;
+    color:#666 !important;
+    font-size:18px;
+    line-height: 15px;
+  }
+  .changedate span {
+    font-size:12px;
+  }
+  .btn-skip {
+    padding:0 1.5rem !important;
+    color:#666;
+    border-color: #666;
+  }
+  .btn-edit {
+    padding:0 1rem !important;
+    color:#666;
+    border-color: #666;
+  }
+
+  ul.sorder {
+    margin-top:10px;
+    padding:0px 0 0 0;
+    text-align:left;
+    float:left;
+    width:100%;
+    list-style-type: none;
+  }
+  ul.sorder li {
+    padding:5px;
+    background-color:#f5f5f5;
+    margin-bottom:5px;
+  }
+  ul.sorder li.first {
+    padding:5px 10px;
+  }
+
+  .subs_status_txt {
+    float:left;
+    text-align:left;
+    padding:5px; padding-left:10px;
+  }
+  .subs_status {
+    float:right;
+    text-align:left;
+    padding:5px; padding-right:10px;
+  }
+
+  .addr_div {
+    margin:10px 0;
+    font-size:13px;
+    float:left;
+    width:100%;
+  }
+  table {
+    font-size:11px;
+    border-collapse: collapse;
+    width:70%;
+    margin:0 auto;
+    margin-top:5px;
+    color:#666;
+  }
+  table th {
+    width:25%;
+    text-align:left;
+    vertical-align: top;
+    padding:5px;
+  }
+  table td {
+    padding:5px;
+    text-align:left;
+    vertical-align: top;
+  }
+  .menu_name {
+    font-weight:500;
+    font-size:12px;
+    margin-bottom:5px;
+  }
+  ul.sorder p {
+    font-weight:300;
+    font-size:12px;
+  }
+
+  .skipbtn {
+    position:absolute;
+    right:10px;
+    top:25px;
+  }
+  .saldobtn {
+    position:absolute;
+    right:10px;
+    top:15px;
+  }
+
+  .changecont{
+    position: relative;
+    background-color:#ececec;float:left;width:100%
+  }
+}

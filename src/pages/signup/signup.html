@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <img src="assets/logoheader.png" style="height:auto;width:25px;float:left;"/>
+      <div style="float:right">Registrasi</div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+    <button ion-button block icon-left (click)="loginFB()" style="background-color:#3b5998;color:#fff">
+        <img src="assets/fbsignin.png" style="position:absolute;left:14px;height:2.2rem;width:auto;top:50%;transform:translateY(-50%)" /> Daftar dengan Facebook
+    </button>
+
+    <button ion-button block icon-left (click)="loginGoogle()" style="background-color:#fff;color:#666;margin-top:10px">
+        <img src="assets/googlesignin.png" style="position:absolute;left:10px;height:3rem;width:auto;top:50%;transform:translateY(-50%)" /> Daftar dengan Google
+    </button>
+
+
+    <div style="width:100%;text-align:center;margin:15px 0">
+      atau
+    </div>
+
+    <form (ngSubmit)="signUp()" #signUpForm="ngForm" novalidate>
+        <ion-item>
+            <ion-label stacked>Nama Depan</ion-label>
+            <ion-input type="text" placeholder="Nama Depan" name="first_name" [(ngModel)]="signUpCredentials.first_name" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Nama Belakang</ion-label>
+            <ion-input type="text" placeholder="Nama Belakang" name="last_name" [(ngModel)]="signUpCredentials.last_name" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Email</ion-label>
+            <ion-input type="email" placeholder="Alamat Email" name="email" [(ngModel)]="signUpCredentials.customer_email" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Password</ion-label>
+            <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="signUpCredentials.customer_password" required></ion-input>
+        </ion-item>
+        <button ion-button class="submit-btn" color="darkbg" full type="submit" [disabled]="!signUpForm.form.valid" style="margin-top:10px">DAFTAR</button>
+    </form>
+
+</ion-content>

@@ -1,0 +1,274 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>BlackGarlic</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngIf="subscription != null">
+    <div class="subs_status_txt">
+      Status Langganan Anda
+    </div>
+    <div class="subs_status">
+      <span *ngIf="subscription.subscription_status == 0">Baru</span>
+      <span *ngIf="subscription.subscription_status == 1" ion-text color="secondary">Aktif</span>
+      <span *ngIf="subscription.subscription_status == 2" ion-text color="danger">Stopped</span>
+    </div>
+    <div padding>
+      <button ion-button round small color="greenbg" (click)="pauseSubscription(1)" *ngIf="subscription.subscription_status == 2">Lanjutkan Langganan</button>
+    </div>
+  </ion-card>
+
+  <ion-card *ngIf="subscription == null">
+    <div class="subs_status_txt">
+      Status Anda {{orderD.unique_id}}
+    </div>
+    <div class="subs_status">
+      <span *ngIf="trial == 1" ion-text color="secondary">Trial Box</span>
+    </div>
+    <div class="subs_status">
+      <button ion-button round small color="greenbg" (click)="subscribeNow()">Mulai Berlangganan</button>
+    </div>
+  </ion-card>
+
+  <div *ngIf="trial == 1">
+    <div *ngFor="let order of orderD; let i = index;">
+      <ion-card padding>
+
+        <div class="placeholder" (click)="showWhich = i" *ngIf="showWhich != i">
+          {{order.order_date}}
+        </div>
+
+        <div class="order_id">
+          Order #{{order.unique_id}}
+        </div>
+        <div class="order_status">
+          <span *ngIf="order.order_status == 0">Menunggu Pembayaran</span>
+          <span *ngIf="order.order_status == -1" ion-text color="danger">Dibatalkan</span>
+          <span *ngIf="order.order_status == 1" ion-text color="secondary">Menunggu Pengiriman</span>
+          <span *ngIf="order.order_status == 2" ion-text color="default">Selesai</span>
+        </div>
+        <div *ngIf="showWhich == i">
+          <div class="upper_cont" padding>
+            <div class="output_hdr" padding>
+              Jadwal pengantaran box:
+              <div class="output_txt outtext_1">
+                {{order.order_day}},<br/> {{order.order_date}}
+              </div>
+            </div>
+
+            <div class="output_hdr" style="margin-top:10px" padding>
+              Biaya BOX:
+              <div class="output_txt outtext_2">{{order.grandtotal | currency : 'IDR' : true : '1.0-0'}}</div>
+              <div *ngIf="order.payment_status == 0 && order.marker == 1" class="payment_method" padding>
+                <p>Anda dapat melakukan pembayaran melalui : <br> 1. Bank Permata dengan Virtual Account: {{order.permata_va}}<br> 2. BCA dengan Virtual Account: {{order.bca_va}} <br> 3. ATM Bersama dengan Virtual Account: (013) {{order.permata_va}}
+              </div>
+              <div *ngIf="order.order_status == -1 && order.payment_status == -1" class="payment_method" padding>
+                Order Anda telah dibatalkan.<br/>
+              </div>
+              <div *ngIf="order.order_status == 1 && order.payment_status == 1" class="payment_method" padding>
+                Order Anda telah dibayar dan akan dikirimkan sesuai tanggal pengiriman.
+              </div>
+              <div class="saldobg">
+                SaldoBG:
+                <div class="output_txt outtext_3">{{saldobg | currency : 'IDR' : true : '1.0-0'}}</div>
+                <div class="saldobtn">
+                  <button ion-button small round outline class="btn-skip" (click)="goSaldo()">Isi Saldo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="addr_div" *ngIf="order.order_status == 0" (click)="order.showAddr=!order.showAddr">
+            Lihat alamat pengantaran
+            <ion-icon name="arrow-dropdown" *ngIf="!order.showAddr"></ion-icon>
+            <ion-icon name="arrow-dropup" *ngIf="order.showAddr"></ion-icon>
+          </div>
+          <ion-note *ngIf="order.showAddr">
+            <table>
+              <tr>
+                <th>Penerima</th>
+                <td>{{order.customer_name}}</td>
+              </tr>
+              <tr>
+                <th>Alamat</th>
+                <td>
+                  {{order.address_content}}
+                </td>
+              </tr>
+              <tr>
+                <th>Mobile</th>
+                <td>{{order.mobile}}</td>
+              </tr>
+              <tr>
+                <td colspan=2>
+                  <button ion-button small color="greenbg" full (click)="editAddress(order.order_id,i);">Ubah</button>
+                </td>
+              </tr>
+            </table>
+          </ion-note>
+
+          <ul class="sorder">
+            <li class="first">
+              Menu yang akan dikirimkan
+              <span style="float:right;color:#00caab">{{order.menus.length}} menu</span>
+            </li>
+            <li *ngFor="let menu of order.menus">
+              <ion-row>
+                <ion-col width-33>
+                  <img src="http://bgmenu.kilatstorage.com/{{menu.menu_id}}.jpg" />
+                </ion-col>
+                <ion-col width-67>
+                  <div class="menu_name">{{menu.menu_name}}</div>
+                  <p>Porsi {{menu.portion}} orang - {{menu.order_menu_price | currency : 'IDR' : true : '1.0-0'}}</p>
+                </ion-col>
+              </ion-row>
+            </li>
+          </ul>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+
+  <div *ngIf="subscription != null">
+    <ion-card *ngIf="orderDetail[0].order_status == -1 && subscription.subscription_status == 1" padding>
+      <div class="upper_cont" padding>
+        <div class="output_hdr" padding>
+          Jadwal pesanan berikutnya dengan menu terbaru akan tersedia tanggal:
+          <div class="output_txt outtext_1">
+            {{next_order_day}},<br/> {{next_order_date}}
+          </div>
+        </div>
+      </div>
+    </ion-card>
+    <div *ngFor="let detail of orderDetail; let i = index;">
+      <ion-card padding>
+
+        <div class="placeholder" (click)="showWhich = i" *ngIf="showWhich != i">
+          {{detail.order_date}}
+        </div>
+
+        <div class="order_id">
+          Order #{{detail.unique_id}}
+        </div>
+        <div class="order_status">
+          <span *ngIf="detail.order_status == 0">Menunggu Pembayaran</span>
+          <span *ngIf="detail.order_status == -1" ion-text color="danger">Dibatalkan</span>
+          <span *ngIf="detail.order_status == 1" ion-text color="secondary">Menunggu Pengiriman</span>
+          <span *ngIf="detail.order_status == 2" ion-text color="default">Selesai</span>
+        </div>
+
+        <div *ngIf="showWhich == i">
+          <div class="upper_cont" padding>
+            <div class="output_hdr" padding>
+              Jadwal pengantaran box:
+              <div class="output_txt outtext_1">
+                {{detail.order_day}},<br/> {{detail.order_date}}
+              </div>
+
+              <div class="skipbtn">
+                <button ion-button small round outline class="btn-skip" [disabled]="!detail.canChange" (click)="skip(detail.order_id,i)" *ngIf="detail.order_status == 0" color="danger">Skip</button>
+                <button ion-button small round outline class="btn-skip" [disabled]="!detail.canChange" (click)="unskip(detail.order_id,i)" *ngIf="detail.order_status == -1 && detail.payment_status == -1" color="secondary">Unskip</button>
+              </div>
+            </div>
+
+            <div class="output_hdr" style="margin-top:10px" padding>
+              Biaya BOX:
+              <div class="output_txt outtext_2">{{detail.grandtotal | currency : 'IDR' : true : '1.0-0'}}</div>
+              <div *ngIf="detail.payment_status == 0 && detail.marker == 1" class="paydate" padding>
+                Pembayaran akan dilakukan secara otomatis pada <br/> {{orderDetail[0].payDate | date : 'mediumDate'}} pukul 15.00
+              </div>
+              <div *ngIf="detail.order_status == -1 && detail.payment_status == -1" class="paydate" padding>
+                Order Anda telah dibatalkan untuk minggu ini.<br/> Pembayaran otomatis tidak akan dilakukan.
+              </div>
+              <div *ngIf="detail.order_status == 1 && detail.payment_status == 1" class="paydate" padding>
+                Order Anda telah dibayar dan akan dikirimkan sesuai tanggal.
+              </div>
+              <div class="saldobg">
+                SaldoBG:
+                <div class="output_txt outtext_3">{{saldobg | currency : 'IDR' : true : '1.0-0'}}</div>
+                <div class="saldobtn">
+                  <button ion-button small round outline class="btn-skip" (click)="goSaldo()">Isi Saldo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="addr_div" *ngIf="detail.order_status == 0" (click)="detail.showAddr=!detail.showAddr">
+            Lihat alamat pengantaran
+            <ion-icon name="arrow-dropdown" *ngIf="!detail.showAddr"></ion-icon>
+            <ion-icon name="arrow-dropup" *ngIf="detail.showAddr"></ion-icon>
+          </div>
+          <ion-note *ngIf="detail.showAddr">
+            <table>
+              <tr>
+                <th>Penerima</th>
+                <td>{{detail.customer_name}}</td>
+              </tr>
+              <tr>
+                <th>Alamat</th>
+                <td>
+                  {{detail.address_content}}
+                </td>
+              </tr>
+              <tr>
+                <th>Mobile</th>
+                <td>{{detail.mobile}}</td>
+              </tr>
+              <tr>
+                <td colspan=2>
+                  <button ion-button small color="greenbg" full (click)="editAddress(detail.order_id,i);">Ubah</button>
+                </td>
+              </tr>
+            </table>
+          </ion-note>
+
+          <ul class="sorder">
+            <li class="first">
+              Menu yang akan dikirimkan
+              <span style="float:right;color:#00caab">{{detail.menus.length}} menu</span>
+            </li>
+            <li *ngFor="let menu of detail.menus">
+              <ion-row>
+                <ion-col col-5>
+                  <img src="http://bgmenu.kilatstorage.com/{{menu.menu_id}}.jpg" />
+                </ion-col>
+                <ion-col col-7>
+                  <div class="menu_name">{{menu.menu_name}}</div>
+                  <p>Porsi {{menu.portion}} orang - {{menu.order_menu_price | currency : 'IDR' : true : '1.0-0'}}</p>
+                </ion-col>
+              </ion-row>
+            </li>
+          </ul>
+
+          <div padding class="changecont">
+            <ion-row no-padding>
+              <ion-col col-8 no-padding>
+                <p *ngIf="detail.payment_status == 0 && detail.canChange == true" class="changedate">
+                  <font style="text-transform:capitalize">{{detail.daysleft}}</font> lagi<br/>
+                  <span>batas akhir waktu untuk mengubah menu anda.</span>
+                </p>
+                <p *ngIf="detail.canChange == false" class="changedate">
+                  <span>Anda tidak dapat mengubah menu lagi karena sudah melewati batas waktunya.</span>
+                </p>
+                <p *ngIf="detail.payment_status == -1 && detail.order_status == -1" class="changedate">
+                  <span>Pesanan anda telah dibatalkan untuk minggu ini.</span>
+                </p>
+              </ion-col>
+              <ion-col no-padding>
+                <button ion-button small round outline class="btn-edit" [disabled]="!detail.canChange || detail.order_status == -1" (click)="editOrder(detail.order_id, detail.box_id)">Atur Menu</button>
+              </ion-col>
+            </ion-row>
+          </div>
+
+        </div>
+
+      </ion-card>
+
+    </div>
+  </div>
+</ion-content>

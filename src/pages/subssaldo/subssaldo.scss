@@ -1,0 +1,124 @@
+page-subssaldo {
+  $button-round-padding : 0 0rem !important;
+
+  .saldobg_cont {
+    background-color:#00caab;
+
+  }
+  .saldo_cont {
+    background-color: rgba(255,255,255,0.9);
+    border-radius:5px;
+    color:#666;
+    font-size:12px;
+  }
+
+  .saldobg_content {
+    margin-top:5px;
+    font-size:24px;
+    font-weight:700;
+  }
+
+  .ref_contz {
+    background-color: #2b2b2b;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  .ref_conty {
+    background-color: #2b2b2b;
+    margin-bottom:10px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  .ref_l {
+    color:white;
+    font-size:12px;
+    font-weight:300;
+  }
+  .ref_c {
+    color:white;
+    font-size:24px;
+    font-weight:700;
+  }
+
+  .cd_l {
+    color:white;
+  }
+  .cd_r {
+
+  }
+  .code_cont {
+    color:black;
+    background-color:#fff;
+    width:100%;
+    border-radius:34px;
+    height:34px;
+    line-height:34px;
+    position: relative;
+  }
+  .code_cnt {
+    flex-wrap:nowrap;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .topup_div {
+    width:49%;
+    border:1px solid #999;
+    float:left;
+    padding:20px 10px;
+    margin-bottom:10px;
+    background-color:white;
+    color:#666;
+    height:125px;
+  }
+
+  .topup_div:nth-child(even) {
+    float:right;
+  }
+
+  .topup_div img {
+    margin-bottom:5px;
+  }
+
+  .share-btn {
+    float:right;
+    margin-right:2px;
+    height:30px;
+    border-radius:30px;
+    font-weight:700;
+    padding:0 10px;
+    margin-top:2px;
+    background-color: #03c9a9;
+    color:#fafafa;
+  }
+
+  table {
+    width:100%;
+    border-collapse: collapse;
+  }
+
+  th {
+    background-color: #2b2b2b;
+    color:white;
+    padding:10px 0;
+    font-size:13px;
+  }
+
+  td {
+    border-bottom:1px solid #b5b5b5;
+    padding:8px 0;
+    text-align: center;
+    font-size:13px;
+  }
+
+  .nextorder_cont {
+      background-color:#fff;
+      color:#666 !important;
+      margin-top:15px;
+  }
+  .nextorder_val {
+    font-weight:700;
+    color:#03c9a9 !important;
+  }
+}

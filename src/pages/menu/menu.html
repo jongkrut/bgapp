@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <img src="assets/logoheader.png" style="height:auto;width:25px;float:left;margin-right:5px"/>
+      <div style="float:right">
+        Menu Terbaru
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div style="margin-bottom:15px">
+    <ion-segment [(ngModel)]="week">
+      <ion-segment-button value="{{week_ids[0]}}">
+        MINGGU INI
+      </ion-segment-button>
+      <ion-segment-button value="{{week_ids[1]}}">
+        MINGGU DEPAN
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="week">
+
+  <div class="week_txt" *ngSwitchCase="week_ids[0]">
+      Pengiriman untuk:<br/>
+      <span *ngIf="week_ids[0]">{{menus1[0].box_start | date : 'MMM dd' }} - {{menus1[0].box_end | date : 'MMM dd' }}</span>
+  </div>
+
+  <ul *ngSwitchCase="week_ids[0]">
+    <li *ngFor="let menu of menus1" (click)="openDetail(menu.menu_id)">
+        <ion-row>
+          <ion-col width-33>
+            <img src="http://bgmenu.kilatstorage.com/{{menu.menu_id}}.jpg" />
+          </ion-col>
+          <ion-col width-67>
+              <div class="menu_tags" *ngIf="menu.menu_type == 3">
+                MENU UTAMA
+              </div>
+              <div class="menu_tags" *ngIf="menu.menu_type > 3">
+                MENU LAIN-LAIN
+              </div>
+              {{menu.menu_name}}
+          </ion-col>
+        </ion-row>
+    </li>
+  </ul>
+
+  <div class="week_txt" *ngSwitchCase="week_ids[1]">
+      Menu Mingguan<br/>
+      <span *ngIf="week_ids[1]">{{menus2[0].box_start | date }} - {{menus2[0].box_end | date }}</span>
+  </div>
+
+  <ul *ngSwitchCase="week_ids[1]">
+    <li *ngFor="let menu of menus2" (click)="openDetail(menu.menu_id)">
+      <ion-row>
+        <ion-col width-33>
+          <img src="http://bgmenu.kilatstorage.com/{{menu.menu_id}}.jpg" />
+        </ion-col>
+        <ion-col width-67>
+            <div class="menu_tags" *ngIf="menu.menu_type == 3">
+              MENU UTAMA
+            </div>
+            <div class="menu_tags" *ngIf="menu.menu_type > 3">
+              MENU LAIN-LAIN
+            </div>
+            {{menu.menu_name}}
+        </ion-col>
+      </ion-row>
+    </li>
+  </ul>
+
+  </div>
+
+</ion-content>

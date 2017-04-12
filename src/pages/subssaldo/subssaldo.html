@@ -1,0 +1,142 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>SaldoBG</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content >
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div padding>
+    <div class="saldobg_cont" padding>
+      <div class="saldo_cont" padding>
+          SaldoBG anda saat ini:
+          <div class="saldobg_content">
+            IDR {{saldobg | number :'1.0-0'}}
+          </div>
+      </div>
+    </div>
+
+    <div class="nextorder_cont" padding *ngIf="nextorder!=0" (click)="goToOrder();">
+      <ion-row no-padding>
+        <ion-col no-padding col-2>
+          <ion-icon style="color:#03c9a9" name="arrow-back"></ion-icon>
+        </ion-col>
+        <ion-col no-padding col-6>
+          <span class="nextorder_left">Pengiriman minggu ini</span>
+        </ion-col>
+        <ion-col no-padding style="text-align:right">
+          <span class="nextorder_val">IDR {{nextorder | number}}</span>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+
+  <div padding-horizontal>
+      <ion-segment [(ngModel)]="listtype">
+        <ion-segment-button value="topup" >
+            Topup
+        </ion-segment-button>
+        <ion-segment-button value="history">
+            Riwayat
+        </ion-segment-button>
+      </ion-segment>
+  </div>
+
+
+  <div [ngSwitch]="listtype" padding>
+
+    <span *ngIf="customer_code  != ''">
+      <div *ngSwitchCase="'topup'" padding class="ref_contz">
+          <ion-row style="border-bottom:1px solid white">
+              <ion-col width-50 class="ref_l">
+                Bagikan kode referral
+                dapatkan SaldoBG gratis
+              </ion-col>
+              <ion-col class="ref_c">
+                IDR 50.000
+              </ion-col>
+          </ion-row>
+      </div>
+      <div *ngSwitchCase="'topup'" padding-left padding-right padding-bottom class="ref_conty">
+          <ion-row no-padding>
+                <ion-col width-20 class="cd_l">
+                    Kode Anda
+                </ion-col>
+                <ion-col no-padding>
+                  <div class="code_cont">
+                      <ion-row no-padding>
+                        <ion-col class="code_cnt" nowrap no-padding padding-left width-67>
+                          {{customer_code}}
+                        </ion-col>
+                        <ion-col nowrap no-padding>
+                          <button class="share-btn" (click)="shareCode()">Bagikan</button>
+                        </ion-col>
+                      </ion-row>
+                  </div>
+                </ion-col>
+          </ion-row>
+      </div>
+    </span>
+
+    <ion-list *ngSwitchCase="'topup'">
+
+      <button ng-item class="topup_div" (click)="openModalVA('bca')">
+        <img src="assets/saldobg/bca.png" />
+        ({{bca_va}})
+      </button>
+
+      <button ng-item class="topup_div" (click)="openModalVA('permata')">
+        <img src="assets/saldobg/permata.png" />
+        ({{permata_va}})
+      </button>
+
+      <button ng-item class="topup_div" (click)="openModalBrowser('doku_wallet')">
+        <img src="assets/saldobg/doku.png" />
+        DOKU Wallet
+      </button>
+
+      <button ng-item class="topup_div" (click)="openModalBrowser('credit_card')">
+        <img src="assets/saldobg/visa.png" />
+        Kartu Kredit Online
+      </button>
+
+    </ion-list>
+
+
+
+    <ion-list *ngSwitchCase="'history'" >
+      <table>
+        <tr>
+          <th>Tanggal</th>
+          <th>Nominal</th>
+          <th>Saldo Sebelum</th>
+        </tr>
+        <tr *ngFor="let hist of history">
+          <td>
+            {{hist.datetime | date : 'y-MM-dd'}}<br/>
+            {{hist.datetime | date : 'HH:mm'}}
+          </td>
+          <td>
+            <span *ngIf="hist.log_type == 2" style="color:red">
+              -{{hist.amount | number}}
+            </span>
+            <span *ngIf="hist.log_type != 2">
+              {{hist.amount | number}}
+            </span>
+          </td>
+          <td>
+            {{hist.saldobg_before | number}}
+          </td>
+        </tr>
+      </table>
+    </ion-list>
+
+  </div>
+
+</ion-content>
