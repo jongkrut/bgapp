@@ -20,6 +20,7 @@ export class AuthPage {
                 private user : User, public auth : Auth, public facebookAuth: FacebookAuth, public googleAuth : GoogleAuth, public app: App) { }
 
   loginSubmit() {
+
       let loader = this.loadingCtrl.create({
           content: "Logging in..."
       });
@@ -30,6 +31,7 @@ export class AuthPage {
 
       this.auth.login('custom', loginData, loginOptions).then(() => {
           loader.dismiss();
+          console.log(this.user)
 
           this.user.details.name = this.user.get('customer',null).first_name + " "  + this.user.get('customer',null).last_name;
           this.user.details.email = this.user.get('customer',null).customer_email;
