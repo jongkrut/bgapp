@@ -86,9 +86,8 @@ export class SubsOrderPage {
       });
   }
   doRefresh(refresher) {
-    if(this.trial == 1) {
+    if(this.trial == 1 && this.subscription == null) {
         this.trialDetail();
-        console.log('order', this.orderD)
     } else {
         this.http.get("http://api.blackgarlic.id:7005/app/order/customer/" + this.customer_id).map(res => res.json()).subscribe(data => {
             this.orderDetail = data;
@@ -247,9 +246,8 @@ export class SubsOrderPage {
   }
 
   reloadMenu() {
-    if (this.trial == 1) {
+    if (this.trial == 1 && this.subscription == null) {
         this.trialDetail();
-        console.log('order', this.orderD)
     } else {
       let loader = this.loadingCtrl.create({
         content: "Loading Your Order..."

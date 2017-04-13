@@ -95,7 +95,6 @@ const cloudSettings: CloudSettings = {
     InAppBrowser,
     Mixpanel,MixpanelPeople,
     Market,
-    Storage,
     SubscribeService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

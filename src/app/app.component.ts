@@ -25,19 +25,16 @@ export class MyApp {
   rootPage: any = WalkthroughPage;
 
   constructor(private platform: Platform, private push: Push, private auth: Auth, private user: User, private http: Http,
-    private alertCtrl: AlertController, private loadingCtrl: LoadingController, private events: Events,
-    statusBar: StatusBar, splashScreen: SplashScreen, private mixpanel: Mixpanel, private mixpanelPeople: MixpanelPeople) {
-  /*  setTimeout(function() {
-      splashScreen.hide();
-    }, 3000);
-    */
+              private alertCtrl: AlertController, private loadingCtrl: LoadingController, private events: Events,
+              statusBar: StatusBar, splashScreen: SplashScreen, private mixpanel: Mixpanel, private mixpanelPeople: MixpanelPeople) {
+
     let loading = this.loadingCtrl.create({
       content: 'Initializing...'
     });
     loading.present();
 
     platform.ready().then(() => {
-      statusBar.styleDefault(); 1
+      statusBar.styleDefault();
 
       if (this.auth.isAuthenticated()) {
         this.loggedIn = true;
@@ -94,7 +91,6 @@ export class MyApp {
         });
       }
       loading.dismiss();
-
     });
 
     events.subscribe('user:login', (trial, subs_status, tipe_login) => {
