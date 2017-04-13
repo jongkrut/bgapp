@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { App, NavController, NavParams } from 'ionic-angular';
+import { App, Platform, NavController, NavParams } from 'ionic-angular';
 import { WelcomePage } from '../welcome/welcome';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 @Component({
   selector: 'page-walkthrough',
@@ -8,8 +9,13 @@ import { WelcomePage } from '../welcome/welcome';
 })
 export class WalkthroughPage {
 
-  constructor(public app: App, public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(private platform: Platform, public splashScreen: SplashScreen, public app: App, public navCtrl: NavController, public navParams: NavParams) { }
 
+  ionViewDidLoad(){
+    this.platform.ready().then(() => {
+    this.splashScreen.hide();
+   });
+  }
   skip() {
     this.app.getRootNav().setRoot(WelcomePage);
   }

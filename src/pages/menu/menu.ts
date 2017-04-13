@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { NavController, ModalController, LoadingController } from 'ionic-angular';
 import { DetailModal } from './detail';
 import 'rxjs/add/operator/map';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 import * as moment from 'moment';
 import 'moment/locale/id';
@@ -20,7 +21,7 @@ export class MenuPage {
   menus2 : any[] = [];
   allmenus;
 
-  constructor(public navCtrl: NavController, public http: Http, public modalCtrl : ModalController, public loadingCtrl: LoadingController) { }
+  constructor(public splashScreen: SplashScreen, public navCtrl: NavController, public http: Http, public modalCtrl : ModalController, public loadingCtrl: LoadingController) { }
 
   ionViewDidLoad() {
 
