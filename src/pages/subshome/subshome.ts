@@ -1,8 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { Auth,User  } from '@ionic/cloud-angular';
+<<<<<<< HEAD
 import { NavController, NavParams,Events, App, Tabs, Platform } from 'ionic-angular';
 import { Market } from '@ionic-native/market';
 import { SplashScreen } from '@ionic-native/splash-screen';
+=======
+import { NavController, Platform,  NavParams,Events, App, Tabs } from 'ionic-angular';
+import { Market } from 'ionic-native';
+>>>>>>> bgapptest
 
 import { AuthPage } from '../auth/auth';
 import { MenuPage } from '../menu/menu';
@@ -13,6 +18,7 @@ import { ProfilePage } from '../profile/profile';
 import { WelcomePage } from '../welcome/welcome';
 import { FeedbackPage } from '../feedback/feedback';
 import { Http } from '@angular/http';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 declare var cordova:any;
 
@@ -32,14 +38,23 @@ export class SubsHomePage {
 
   tabParams: number = 0;
 
+<<<<<<< HEAD
   constructor(public navCtrl: NavController, public navParams : NavParams, public auth:Auth, private user : User, private platform: Platform, private splashScreen : SplashScreen) {
+=======
+  constructor(private platform: Platform, Platform, public splashScreen: SplashScreen, public navCtrl: NavController, public navParams : NavParams, public auth:Auth, private user : User) {
+>>>>>>> bgapptest
     this.tabParams = navParams.get("tabs");
   }
 
   ionViewDidLoad(){
+<<<<<<< HEAD
     this.platform.ready().then(()=>{
           this.splashScreen.hide();
     });
+=======
+    this.platform.ready().then(() => {
+    this.splashScreen.hide();
+>>>>>>> bgapptest
     let user = this.user.get('subscription',null);
     let userd = this.user.get('customer',null);
     if(user != null){
@@ -48,6 +63,7 @@ export class SubsHomePage {
     if(userd.trial == "1"){
       this.tab2Title = "Info Trial";
     }
+   });
   }
 
   ionViewDidEnter(){

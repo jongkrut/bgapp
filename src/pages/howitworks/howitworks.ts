@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ModalController,Tabs } from 'ionic-angular';
+import { NavController, NavParams,ModalController,Tabs, App } from 'ionic-angular';
 import { HowModal } from './hiw';
 import { WhyModal } from './whyus';
+import { Subsstep1Page} from '../subscribe/subscribe';
 
 @Component({
   selector: 'page-howitworks',
@@ -9,7 +10,7 @@ import { WhyModal } from './whyus';
 })
 export class HowitworksPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,private tabs: Tabs) {}
+  constructor(public app:App, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,private tabs: Tabs) {}
 
   openModalHow(){
     let modal = this.modalCtrl.create(HowModal);
@@ -29,7 +30,7 @@ export class HowitworksPage {
     modal.present();
   }
 
-  goReg(val){
-    this.tabs.select(2);
+  goReg(){
+    this.app.getRootNav().push(Subsstep1Page);
   }
 }
