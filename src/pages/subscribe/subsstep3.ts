@@ -102,22 +102,16 @@ export class Subsstep3Page {
         this.subscribeData = this.subscribeService.getSubscribe();
         this.subscribeData.cart = [];
         this.subscribeData.cartDetail = {};
-
         let d = moment.unix(this.subscribeData.step1.delivery_date);
-        console.log(1)
 
         this.url = 'http://api.blackgarlic.id:7005/app/menu/week/' + d.format('YYYY-MM-DD') + '/' + this.subscribeData.step1.portion;
-        this.http.get(this.url)
-            .map(res => res.json())
-            .subscribe(data => {
-              console.log(2)
-                this.data = data;
-                for(let d of this.data) {
-                  d.qty = 0;
-                }
-                console.log(data)
-                loading.dismissAll();
-            });
+        this.http.get(this.url).map(res => res.json()).subscribe(data => {
+            this.data = data;
+            for(let d of this.data) {
+                d.qty = 0;
+            }
+            loading.dismissAll();
+        });
     }
 
     update(m, type) {
@@ -152,7 +146,8 @@ export class Subsstep3Page {
     }
 
    subscribe(){
-     this.subscribeData.cartDetail = {"diskon" : this.total_discount, "total" : this.total_price, "total_items" : this.total_items};
+     let grandtotal = this.total_price - this.total_discount;
+     this.subscribeData.cartDetail = {"diskon" : this.total_discount, "total" : grandtotal, "total_items" : this.total_items};
      this.subscribeData.cart = this.cart;
      this.subscribeData.step1.menu_total = this.total_items;
      this.events.publish('user:subscheckout',this.cart[0], '3');
@@ -161,8 +156,8 @@ export class Subsstep3Page {
    }
 
    disableAdd() {
-   if (this.total_items <= 1 || this.total_price < 150000) {
-     return false;
+     if (this.total_items <= 1 || this.total_price < 150000) {
+       return false;
+     }
    }
- }
 }

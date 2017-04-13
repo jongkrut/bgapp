@@ -18,9 +18,9 @@ export class Subsstep1Page {
     subscribeStep1 = { city: '0', delivery_date: '', portion: '', menu_total: ''};
     step1check = { check1 : true, check2 : false, check3 : false, check4 : false };
     selectedDay = { day : "", first : ""};
-    endOfNextWeek = moment().endOf('week').add(7,'d');
+    endOfNextWeek = moment().endOf('week').add(6,'d');
     startOfNextWeek = moment().startOf('week').add(8,'d');
-    endOfWeek = moment().endOf('week');
+    endOfWeek = moment().endOf('week').subtract(1,'d');
     thisWeek: any = [];
     nextWeek: any = [];
     d: any;

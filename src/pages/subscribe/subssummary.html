@@ -92,14 +92,23 @@
 
   <ion-card *ngFor="let menu of cart; let m = index" text-wrap class="menu">
         <ion-row>
-            <ion-col width-33 style="padding:5px">
+            <ion-col col-4 style="padding:5px">
                   <img src="https://bgmenu.kilatstorage.com/{{menu.menu_id}}.jpg" />
             </ion-col>
-            <ion-col width-67 style="padding:5px">
+            <ion-col col-8 style="padding:5px">
                   <div class="menu_name">{{menu.menu_name}}</div>
                   <div class="menu_desc">Porsi {{menu.portion}} orang - IDR {{menu.menu_price | number : '1.0-0'}}</div>
             </ion-col>
         </ion-row>
+  </ion-card>
+
+  <ion-card>
+    <div class="menu" style="padding:5px 10px">
+        Diskon Box Pertama
+        <span style="float:right">
+          IDR {{subscribe.cartDetail.diskon | number : '1.0-0'}}
+        </span>
+    </div>
   </ion-card>
 
   <ion-card>

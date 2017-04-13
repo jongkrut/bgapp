@@ -27,9 +27,10 @@ export class MyApp {
   constructor(private platform: Platform, private push: Push, private auth: Auth, private user: User, private http: Http,
     private alertCtrl: AlertController, private loadingCtrl: LoadingController, private events: Events,
     statusBar: StatusBar, splashScreen: SplashScreen, private mixpanel: Mixpanel, private mixpanelPeople: MixpanelPeople) {
-    setTimeout(function() {
+  /*  setTimeout(function() {
       splashScreen.hide();
     }, 3000);
+    */
     let loading = this.loadingCtrl.create({
       content: 'Initializing...'
     });

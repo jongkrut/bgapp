@@ -46,6 +46,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Push } from '@ionic-native/push';
 import { Mixpanel,MixpanelPeople } from '@ionic-native/mixpanel';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Market } from '@ionic-native/market';
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -93,6 +94,7 @@ const cloudSettings: CloudSettings = {
     Push,
     InAppBrowser,
     Mixpanel,MixpanelPeople,
+    Market,
     Storage,
     SubscribeService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
