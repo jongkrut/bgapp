@@ -11,6 +11,7 @@ import { AuthPage } from '../auth/auth';
 export class SubsProfilePage {
 
   subscription : any = {};
+  address : any = {};
   subscriptionStatus : boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private events: Events, private user: User,private auth: Auth, private modalCtrl : ModalController, private alertCtrl: AlertController) { }
@@ -58,6 +59,7 @@ export class SubsProfilePage {
     let modal = this.modalCtrl.create(SubsProfileEditPage, {});
     modal.onDidDismiss(data => {
       this.subscription = this.user.get('subscription',null);
+      this.address = this.user.get('address',null);
       if(this.subscription.subscription_status == 1)
         this.subscriptionStatus = true;
       else
@@ -70,6 +72,7 @@ export class SubsProfilePage {
     let modal = this.modalCtrl.create(SubsEditPage, {});
     modal.onDidDismiss(data => {
       this.subscription = this.user.get('subscription',null);
+      this.address = this.user.get('address',null);
       if(this.subscription.subscription_status == 1)
         this.subscriptionStatus = true;
       else
@@ -80,14 +83,13 @@ export class SubsProfilePage {
 
   ionViewDidEnter() {
     this.subscription = this.user.get('subscription',null);
+    this.address = this.user.get('address',null);
     if(this.subscription.subscription_status == 1)
       this.subscriptionStatus = true;
     else
       this.subscriptionStatus = false;
   }
-  ionViewWillEnter(){
 
-  }
   ionViewCanEnter(){
     if(!this.auth.isAuthenticated()) {
       this.navCtrl.setRoot(AuthPage);
@@ -234,7 +236,7 @@ export class SubsProfileEditPage {
   subscription : any = {};
 
   constructor( public viewCtrl : ViewController, public navParams: NavParams, private user: User, private http: Http) {
-    this.subscription = user.get('subscription',null);
+    this.subscription = user.get('address',null);
     this.postData.customer_name = this.subscription.customer_name;
     this.postData.address_content = this.subscription.address_content;
     this.postData.city = this.subscription.city;
@@ -246,7 +248,8 @@ export class SubsProfileEditPage {
 
   saveAddress(){
       this.http.post("http://api.blackgarlic.id:7005/app/subscription/address/update/", this.postData).map(res => res.json()).subscribe(data => {
-      this.user.set('subscription',data);
+      this.user.set('subscription',data.subscription);
+      this.user.set('address',data.address);
       this.user.save();
       this.viewCtrl.dismiss();
     });

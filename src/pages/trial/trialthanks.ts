@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, App,  ModalController } from 'ionic-angular';
+import { NavController, App,  ModalController } from 'ionic-angular';
 import { SubscribeService } from '../../providers/subscribe-service';
-import { VAPage } from './va';
 import { User } from '@ionic/cloud-angular';
 import * as moment from 'moment';
 import 'moment/locale/id';

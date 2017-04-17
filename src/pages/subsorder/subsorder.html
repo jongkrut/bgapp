@@ -35,51 +35,38 @@
     </div>
   </ion-card>
 
-  <div *ngIf="trial == 1">
+  <div *ngIf="subscription == null">
     <div *ngFor="let order of orderD; let i = index;">
       <ion-card padding>
-
-        <div class="placeholder" (click)="showWhich = i" *ngIf="showWhich != i">
-          {{order.order_date}}
-        </div>
-
-        <div class="order_id">
-          Order #{{order.unique_id}}
-        </div>
+        <div class="placeholder" (click)="showWhich = i" *ngIf="showWhich != i">{{order.order_date}}</div>
+        <div class="order_id">Order #{{order.unique_id}}</div>
         <div class="order_status">
-          <span *ngIf="order.order_status == 0">Menunggu Pembayaran</span>
-          <span *ngIf="order.order_status == -1" ion-text color="danger">Dibatalkan</span>
-          <span *ngIf="order.order_status == 1" ion-text color="secondary">Menunggu Pengiriman</span>
-          <span *ngIf="order.order_status == 2" ion-text color="default">Selesai</span>
+            <span *ngIf="order.order_status == 0">Menunggu Pembayaran</span>
+            <span *ngIf="order.order_status == -1" ion-text color="danger">Dibatalkan</span>
+            <span *ngIf="order.order_status == 1" ion-text color="secondary">Menunggu Pengiriman</span>
+            <span *ngIf="order.order_status == 2" ion-text color="default">Selesai</span>
         </div>
         <div *ngIf="showWhich == i">
           <div class="upper_cont" padding>
             <div class="output_hdr" padding>
-              Jadwal pengantaran box:
-              <div class="output_txt outtext_1">
-                {{order.order_day}},<br/> {{order.order_date}}
-              </div>
+                Jadwal pengantaran box:
+                <div class="output_txt outtext_1">
+                  {{order.order_day}},<br/> {{order.order_date}}
+                </div>
             </div>
 
             <div class="output_hdr" style="margin-top:10px" padding>
-              Biaya BOX:
-              <div class="output_txt outtext_2">{{order.grandtotal | currency : 'IDR' : true : '1.0-0'}}</div>
-              <div *ngIf="order.payment_status == 0 && order.marker == 1" class="payment_method" padding>
-                <p>Anda dapat melakukan pembayaran melalui : <br> 1. Bank Permata dengan Virtual Account: {{order.permata_va}}<br> 2. BCA dengan Virtual Account: {{order.bca_va}} <br> 3. ATM Bersama dengan Virtual Account: (013) {{order.permata_va}}
-              </div>
-              <div *ngIf="order.order_status == -1 && order.payment_status == -1" class="payment_method" padding>
-                Order Anda telah dibatalkan.<br/>
-              </div>
-              <div *ngIf="order.order_status == 1 && order.payment_status == 1" class="payment_method" padding>
-                Order Anda telah dibayar dan akan dikirimkan sesuai tanggal pengiriman.
-              </div>
-              <div class="saldobg">
-                SaldoBG:
-                <div class="output_txt outtext_3">{{saldobg | currency : 'IDR' : true : '1.0-0'}}</div>
-                <div class="saldobtn">
-                  <button ion-button small round outline class="btn-skip" (click)="goSaldo()">Isi Saldo</button>
+                Biaya BOX:
+                <div class="output_txt outtext_2">{{order.grandtotal | currency : 'IDR' : true : '1.0-0'}}</div>
+                <div *ngIf="order.payment_status == 0 && order.marker == 1" class="payment_method" padding>
+                  <p>Anda dapat melakukan pembayaran melalui : <br> 1. Bank Permata dengan Virtual Account: {{order.permata_va}}<br> 2. BCA dengan Virtual Account: {{order.bca_va}} <br> 3. ATM Bersama dengan Virtual Account: (013) {{order.permata_va}}
                 </div>
-              </div>
+                <div *ngIf="order.order_status == -1 && order.payment_status == -1" class="payment_method" padding>
+                  Order Anda telah dibatalkan.<br/>
+                </div>
+                <div *ngIf="order.order_status == 1 && order.payment_status == 1" class="payment_method" padding>
+                  Order Anda telah dibayar dan akan dikirimkan sesuai tanggal pengiriman.
+                </div>
             </div>
           </div>
 
@@ -96,18 +83,11 @@
               </tr>
               <tr>
                 <th>Alamat</th>
-                <td>
-                  {{order.address_content}}
-                </td>
+                <td>{{order.address_content}}</td>
               </tr>
               <tr>
                 <th>Mobile</th>
                 <td>{{order.mobile}}</td>
-              </tr>
-              <tr>
-                <td colspan=2>
-                  <button ion-button small color="greenbg" full (click)="editAddress(order.order_id,i);">Ubah</button>
-                </td>
               </tr>
             </table>
           </ion-note>
@@ -119,10 +99,10 @@
             </li>
             <li *ngFor="let menu of order.menus">
               <ion-row>
-                <ion-col width-33>
+                <ion-col col-5>
                   <img src="http://bgmenu.kilatstorage.com/{{menu.menu_id}}.jpg" />
                 </ion-col>
-                <ion-col width-67>
+                <ion-col col-7>
                   <div class="menu_name">{{menu.menu_name}}</div>
                   <p>Porsi {{menu.portion}} orang - {{menu.order_menu_price | currency : 'IDR' : true : '1.0-0'}}</p>
                 </ion-col>
@@ -135,7 +115,7 @@
   </div>
 
   <div *ngIf="subscription != null">
-    <ion-card *ngIf="orderDetail[0].order_status == -1 && subscription.subscription_status == 1" padding>
+    <ion-card *ngIf=" (orderDetail[0].order_status == -1 || orderDetail[0].order_status == 2) && subscription.subscription_status == 1" padding>
       <div class="upper_cont" padding>
         <div class="output_hdr" padding>
           Jadwal pesanan berikutnya dengan menu terbaru akan tersedia tanggal:
@@ -147,7 +127,6 @@
     </ion-card>
     <div *ngFor="let detail of orderDetail; let i = index;">
       <ion-card padding>
-
         <div class="placeholder" (click)="showWhich = i" *ngIf="showWhich != i">
           {{detail.order_date}}
         </div>
@@ -247,7 +226,7 @@
 
           <div padding class="changecont">
             <ion-row no-padding>
-              <ion-col col-8 no-padding>
+              <ion-col col-6 no-padding>
                 <p *ngIf="detail.payment_status == 0 && detail.canChange == true" class="changedate">
                   <font style="text-transform:capitalize">{{detail.daysleft}}</font> lagi<br/>
                   <span>batas akhir waktu untuk mengubah menu anda.</span>

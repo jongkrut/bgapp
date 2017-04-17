@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,App, Events } from 'ionic-angular';
 import { Auth } from '@ionic/cloud-angular';
-import { Storage } from '@ionic/storage';
 import { SubscribeService } from '../../providers/subscribe-service';
 import * as moment from 'moment';
 import 'moment/locale/id';
 
 import { Subsstep2Page } from './subsstep2';
-import { HomePage } from '../home/home';
+import { WelcomePage } from '../welcome/welcome';
 
 @Component({
   selector: 'page-subsstep1',
@@ -26,7 +25,7 @@ export class Subsstep1Page {
     d: any;
     subscribeData: any = {};
 
-    constructor(private nav: NavController, public navParams: NavParams,public events: Events, public storage: Storage, public subscribeService : SubscribeService, public auth: Auth, public app: App) {
+    constructor(private nav: NavController, public navParams: NavParams,public events: Events, public subscribeService : SubscribeService, public auth: Auth, public app: App) {
         this.d = moment();
         this.d = this.d.add(2,'days');
 
@@ -66,8 +65,8 @@ export class Subsstep1Page {
     }
 
     ionViewCanEnter(){
-      //if(!this.auth.isAuthenticated()) {
-      //  this.app.getRootNav().setRoot(HomePage);
-      //}
+      if(!this.auth.isAuthenticated()) {
+        this.app.getRootNav().setRoot(WelcomePage);
+      }
     }
 }

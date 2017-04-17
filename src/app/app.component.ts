@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, AlertController, LoadingController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Push, RegistrationEventResponse, NotificationEventResponse, NotificationEventAdditionalData } from '@ionic-native/push';
+import { Push, RegistrationEventResponse, NotificationEventResponse } from '@ionic-native/push';
 import { Mixpanel, MixpanelPeople } from '@ionic-native/mixpanel';
 
 import { Auth, User } from '@ionic/cloud-angular';

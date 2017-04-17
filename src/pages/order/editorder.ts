@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, LoadingController, Events, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events, ToastController,Content } from 'ionic-angular';
 import { Http } from '@angular/http';
-import { Content } from 'ionic-angular';
+import { User } from '@ionic/cloud-angular';
 
 @Component({
   selector : 'edit-order',
@@ -17,7 +17,7 @@ export class EditOrderPage {
   order_id : number;
   carttotal : number = 0;
 
-  constructor(public navParams: NavParams, private http: Http, private navCtrl:NavController, private loadingCtrl: LoadingController, private events: Events,private toastCtrl: ToastController) {
+  constructor(public navParams: NavParams, private http: Http, private navCtrl:NavController, private loadingCtrl: LoadingController, private events: Events,private toastCtrl: ToastController, private user: User) {
       let loading = this.loadingCtrl.create({
         content: 'Loading up menus...'
       });
@@ -110,6 +110,7 @@ export class EditOrderPage {
   }
 
   saveOrder(){
+    let customer = this.user.get("customer",null);
     let loading = this.loadingCtrl.create({
       content: 'Saving ...'
     });
@@ -123,7 +124,7 @@ export class EditOrderPage {
         }
       }
     }
-    let order_detail = { order_id : this.order_id, grandtotal : this.total_price, menus: menusave};
+    let order_detail = { order_id : this.order_id, customer_id : customer.customer_id, customer_status : customer.customer_status, grandtotal : this.total_price, menus: menusave};
 
     this.http.post("http://api.blackgarlic.id:7005/app/order/edit/",order_detail).map(res => res.json()).subscribe(data => {
         this.events.publish("menu-update");

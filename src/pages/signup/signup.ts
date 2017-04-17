@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, Events, LoadingController, App } from 'ionic-angular';
 import { Auth, User,FacebookAuth,GoogleAuth } from '@ionic/cloud-angular';
-import { InAppBrowser } from 'ionic-native';
 import * as cryptojs from 'crypto-js';
 
 import { Http } from '@angular/http';

@@ -3,8 +3,8 @@ import { NavController, NavParams, App, ModalController, Events, ViewController 
 import { SubscribeService } from '../../providers/subscribe-service';
 import { TrialthanksPage } from './trialthanks';
 import { User } from '@ionic/cloud-angular';
-import { Http, Headers} from '@angular/http';
-import {InAppBrowser} from 'ionic-native';
+import { Http } from '@angular/http';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import 'rxjs/add/operator/map';
 import * as moment from 'moment';
 import * as cryptojs from 'crypto-js';
@@ -34,7 +34,7 @@ export class TrialStep4Page {
   permata_va: string = '';
 
   i = 0;
-  constructor(public viewCtrl: ViewController, private app: App, public nav: NavController, private user: User, private events: Events, public navParams: NavParams, public subscribeService: SubscribeService, public http: Http, public modalCtrl: ModalController) {
+  constructor(public viewCtrl: ViewController, private app: App, public nav: NavController, private user: User, private events: Events, public navParams: NavParams, public subscribeService: SubscribeService, public http: Http, public modalCtrl: ModalController, private iab: InAppBrowser) {
     this.getPosts();
   }
 
@@ -96,14 +96,11 @@ export class TrialStep4Page {
         if (this.payment_method == 'va') {
           this.app.getRootNav().setRoot(TrialthanksPage);
         } else {
-
-          console.log(this.payment_method)
           let trx_id = data.trial.unique_id;
-          let keyz = "APP";
 
           let payScript = this.postDokuData(this.subscribe.cartDetail.total, trx_id);
 
-          let browser = new InAppBrowser('http://payment.blackgarlic.id/doku_mobile.html', '_blank', 'location=no');
+          let browser = this.iab.create('http://payment.blackgarlic.id/doku_mobile.html', '_blank', 'location=no');
           browser.on("loadstart").subscribe(
             event => {
               if (event.url.indexOf("https://blackgarlic.id") > -1) {

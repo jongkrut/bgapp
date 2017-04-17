@@ -41,38 +41,38 @@
       </ion-list-header>
       <button ion-item >
         <h3>Nama Penerima</h3>
-        <p>{{subscription.customer_name}}</p>
+        <p>{{address.customer_name}}</p>
       </button>
       <button ion-item>
         <h3>Alamat Lengkap</h3>
-        <p>{{subscription.address_content}}</p>
+        <p>{{address.address_content}}</p>
       </button>
       <button ion-item>
         <h3>Kota</h3>
-        <p *ngIf="subscription.city==1">Jakarta Pusat</p>
-        <p *ngIf="subscription.city==2">Jakarta Selatan</p>
-        <p *ngIf="subscription.city==3">Jakarta Barat</p>
-        <p *ngIf="subscription.city==4">Jakarta Utara</p>
-        <p *ngIf="subscription.city==5">Jakarta Timur</p>
-        <p *ngIf="subscription.city==6">Tangerang</p>
-        <p *ngIf="subscription.city==7">Bekasi Kota</p>
-        <p *ngIf="subscription.city==8">Tangerang Selatan</p>
-        <p *ngIf="subscription.city==9">Depok</p>
-        <p *ngIf="subscription.city==10">Bogor</p>
-        <p *ngIf="subscription.city==11">Tambun</p>
-        <p *ngIf="subscription.city==12">Cikarang</p>
+        <p *ngIf="address.city==1">Jakarta Pusat</p>
+        <p *ngIf="address.city==2">Jakarta Selatan</p>
+        <p *ngIf="address.city==3">Jakarta Barat</p>
+        <p *ngIf="address.city==4">Jakarta Utara</p>
+        <p *ngIf="address.city==5">Jakarta Timur</p>
+        <p *ngIf="address.city==6">Tangerang</p>
+        <p *ngIf="address.city==7">Bekasi Kota</p>
+        <p *ngIf="address.city==8">Tangerang Selatan</p>
+        <p *ngIf="address.city==9">Depok</p>
+        <p *ngIf="address.city==10">Bogor</p>
+        <p *ngIf="address.city==11">Tambun</p>
+        <p *ngIf="address.city==12">Cikarang</p>
       </button>
       <button ion-item>
         <h3>Kode Pos</h3>
-        <p>{{subscription.zipcode}}</p>
+        <p>{{address.zipcode}}</p>
       </button>
       <button ion-item>
         <h3>Telepon</h3>
-        <p>{{subscription.mobile}}</p>
+        <p>{{address.mobile}}</p>
       </button>
       <button ion-item>
         <h3>Catatan Pengantaran</h3>
-        <p>{{subscription.address_notes}}</p>
+        <p>{{address.address_notes}}</p>
       </button>
     </ion-list>
 

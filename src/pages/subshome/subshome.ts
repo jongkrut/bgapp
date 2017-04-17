@@ -4,7 +4,6 @@ import { NavController, NavParams,Events, App, Tabs, Platform } from 'ionic-angu
 import { Market } from '@ionic-native/market';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { AuthPage } from '../auth/auth';
 import { MenuPage } from '../menu/menu';
 import { SubsOrderPage } from '../subsorder/subsorder';
 import { SubsSaldoPage } from '../subssaldo/subssaldo';
@@ -12,7 +11,6 @@ import { SubsProfilePage } from '../subsprofile/subsprofile';
 import { ProfilePage } from '../profile/profile';
 import { WelcomePage } from '../welcome/welcome';
 import { FeedbackPage } from '../feedback/feedback';
-import { Http } from '@angular/http';
 
 declare var cordova:any;
 
@@ -37,17 +35,13 @@ export class SubsHomePage {
   }
 
   ionViewDidLoad(){
-    this.platform.ready().then(()=>{
+      this.platform.ready().then(()=>{
           this.splashScreen.hide();
-    });
-    let user = this.user.get('subscription',null);
-    let userd = this.user.get('customer',null);
-    if(user != null){
-      this.tab2Title = "Langganan";
-    }
-    if(userd.trial == "1"){
-      this.tab2Title = "Info Trial";
-    }
+      });
+      let userd = this.user.get('customer',null);
+      if(userd.subscription_status == 0 && userd.trial == 1){
+          this.tab2Title = "Info Trial";
+      }
   }
 
   ionViewDidEnter(){
