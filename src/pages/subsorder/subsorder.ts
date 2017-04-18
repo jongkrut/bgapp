@@ -48,30 +48,29 @@ export class SubsOrderPage {
       this.events.subscribe('saldobg:update', () => {
           this.saldobg = this.user.get('customer', null).balance;
       });
+
+      this.reloadMenu();
   }
 
   trialDetail() {
       this.http.get("http://api.blackgarlic.id:7005/app/order/trial/" + this.customer_id).map(res => res.json()).subscribe(data => {
           this.orderD = data;
-          console.log('orderDetail', this.orderD)
           for (let ord of this.orderD) {
-            ord.payDate = moment(ord.order_date).locale("id").subtract(2, 'days').hour(15);
-            ord.payDate1 = moment(ord.order_date).locale("id").subtract(1, 'days').hour(15);
-            ord.showAddr = false;
-            ord.marker = 0;
-            ord.canChange = false;
-            ord.daysleft = "";
-            let currentdate = moment().locale("id");
-            ord.bca_va = "74100 " + ("100 000" + ord.order_id).slice(-11);
-            ord.permata_va = "8545 5600 " + ("100" + ord.order_id).slice(-8);
+              ord.payDate = moment(ord.order_date).locale("id").subtract(2, 'days').hour(15);
+              ord.payDate1 = moment(ord.order_date).locale("id").subtract(1, 'days').hour(15);
+              ord.showAddr = false;
+              ord.marker = 0;
+              ord.canChange = false;
+              ord.daysleft = "";
+              let currentdate = moment().locale("id");
+              ord.bca_va = "74100 " + ("100 000" + ord.order_id).slice(-11);
+              ord.permata_va = "8545 5600 " + ("100" + ord.order_id).slice(-8);
 
-            if (currentdate.isBefore(ord.payDate)) {
-              ord.daysleft = ord.payDate.from(currentdate, true);
-              ord.canChange = true;
               if (currentdate.isBefore(ord.payDate)) {
-                ord.marker = 1;
+                  ord.daysleft = ord.payDate.from(currentdate, true);
+                  ord.canChange = true;
+                  ord.marker = 1;
               }
-            }
           }
 
           if (this.orderDetail.length == 2) {
@@ -86,63 +85,8 @@ export class SubsOrderPage {
       });
   }
   doRefresh(refresher) {
-    if(this.trial == 1) {
-        this.trialDetail();
-        console.log('order', this.orderD)
-    } else {
-        this.http.get("http://api.blackgarlic.id:7005/app/order/customer/" + this.customer_id).map(res => res.json()).subscribe(data => {
-            this.orderDetail = data;
-            for (let ord of this.orderDetail) {
-              ord.payDate = moment(ord.order_date).locale("id").subtract(2, 'days').hour(15);
-              ord.payDate1 = moment(ord.order_date).locale("id").subtract(1, 'days').hour(15);
-              ord.showAddr = false;
-              ord.marker = 0;
-              ord.canChange = false;
-              ord.daysleft = "";
-              let currentdate = moment().locale("id");
-              let currdate = moment().locale("id").isoWeekday();
-              let deldate = this.subscription.delivery_day;
-              console.log('curr', currdate, 'deldate', deldate)
-              if (currdate <= deldate) {
-                this.next_order_day = moment().locale("id").isoWeekday(this.subscription.delivery_day).format('dddd');
-                this.next_order_date = moment().locale("id").isoWeekday(this.subscription.delivery_day).format('D MMMM YYYY');
-              }
-              if (currdate > deldate) {
-                this.next_order_day = moment().locale("id").isoWeekday(this.subscription.delivery_day).add(7, 'd').format('dddd');
-                this.next_order_date = moment().locale("id").isoWeekday(this.subscription.delivery_day).add(7, 'd').format('D MMMM YYYY');
-              }
-              ord.order_day = moment(ord.order_date).locale("id").format('dddd');
-              ord.order_date = moment(ord.order_date).locale("id").format('D MMMM YYYY');
-
-              console.log('nextorderdate', this.next_order_date, 'ord.added', ord.added)
-
-              if(currentdate.isBefore(ord.payDate)) {
-                ord.daysleft = ord.payDate.from(currentdate, true);
-                ord.canChange = true;
-                if (currentdate.isBefore(ord.payDate)) {
-                  ord.marker = 1;
-                }
-              }
-
-              if(ord.order_status == '-1') {
-                ord.skipOrder = true;
-              } else {
-                ord.skipOrder = false;
-              }
-            }
-
-            if (this.orderDetail.length == 2) {
-              this.showWhich = 1;
-              if (this.orderDetail[0].order_status >= 0 && this.orderDetail[0].order_status < 2)
-                this.showWhich = 0;
-              if (this.orderDetail[0].order_status == 2)
-                this.showWhich = 1;
-            } else {
-              this.showWhich = 0;
-            }
-        });
-    }
-    refresher.complete();
+      refresher.complete();
+      this.reloadMenu();
   }
 
   skip(order_id, ind) {
@@ -242,14 +186,9 @@ export class SubsOrderPage {
     this.tabs.select(2);
   }
 
-  ionViewDidEnter() {
-    this.reloadMenu();
-  }
-
   reloadMenu() {
-    if (this.trial == 1) {
+    if (this.trial == 1 && this.subscription == null) {
         this.trialDetail();
-        console.log('order', this.orderD)
     } else {
       let loader = this.loadingCtrl.create({
         content: "Loading Your Order..."
@@ -260,50 +199,40 @@ export class SubsOrderPage {
           this.orderDetail = data;
           moment.locale('id');
           for (let ord of this.orderDetail) {
-            ord.payDate = moment(ord.order_date).locale("id").subtract(2, 'days').hour(15);
-            ord.payDate1 = moment(ord.order_date).locale("id").subtract(1, 'days').hour(15);
-            ord.showAddr = false;
-            ord.marker = 0;
-            ord.canChange = false;
-            ord.daysleft = "";
-            let currentdate = moment().locale("id");
-            let currdate = moment().locale("id").isoWeekday();
-            let deldate = this.subscription.delivery_day;
-            console.log('curr', currdate, 'deldate', deldate)
-            if (currdate <= deldate) {
-              this.next_order_day = moment().locale("id").isoWeekday(this.subscription.delivery_day).format('dddd');
-              this.next_order_date = moment().locale("id").isoWeekday(this.subscription.delivery_day).format('D MMMM YYYY');
-            }
-            if (currdate > deldate) {
-              this.next_order_day = moment().locale("id").isoWeekday(this.subscription.delivery_day).add(7, 'd').format('dddd');
-              this.next_order_date = moment().locale("id").isoWeekday(this.subscription.delivery_day).add(7, 'd').format('D MMMM YYYY');
-            }
-            ord.order_day = moment(ord.order_date).locale("id").format('dddd');
-            ord.order_date = moment(ord.order_date).locale("id").format('D MMMM YYYY');
-            console.log('nextorderdate', this.next_order_date, 'ord.added', ord.added)
-            if (currentdate.isBefore(ord.payDate)) {
-              ord.daysleft = ord.payDate.from(currentdate, true);
-              ord.canChange = true;
-              if (currentdate.isBefore(ord.payDate)) {
-                ord.marker = 1;
-              }
-            }
+              ord.payDate = moment(ord.order_date).locale("id").subtract(2, 'days').hour(15);
+              ord.payDate1 = moment(ord.order_date).locale("id").subtract(1, 'days').hour(15);
+              ord.showAddr = false;
+              ord.marker = 0;
+              ord.canChange = false;
+              ord.daysleft = "";
+              let currentdate = moment().locale("id");
+              let currdate = moment().locale("id").isoWeekday();
+              let deldate = this.subscription.delivery_day;
 
-            if (ord.order_status == '-1') {
-              ord.skipOrder = true;
-            } else {
-              ord.skipOrder = false;
-            }
+              if (currdate <= deldate) {
+                this.next_order_day = moment().locale("id").isoWeekday(this.subscription.delivery_day).format('dddd');
+                this.next_order_date = moment().locale("id").isoWeekday(this.subscription.delivery_day).format('D MMMM YYYY');
+              }
+              if (currdate > deldate) {
+                this.next_order_day = moment().locale("id").isoWeekday(this.subscription.delivery_day).add(7, 'd').format('dddd');
+                this.next_order_date = moment().locale("id").isoWeekday(this.subscription.delivery_day).add(7, 'd').format('D MMMM YYYY');
+              }
+              ord.order_day = moment(ord.order_date).locale("id").format('dddd');
+              ord.order_date = moment(ord.order_date).locale("id").format('D MMMM YYYY');
+
+              if (currentdate.isBefore(ord.payDate)) {
+                  ord.daysleft = ord.payDate.from(currentdate, true);
+                  ord.canChange = true;
+                  ord.marker = 1;
+              }
           }
 
+          this.showWhich = 0;
           if (this.orderDetail.length == 2) {
-            this.showWhich = 0;
-            if (this.orderDetail[1].order_status >= 0 && this.orderDetail[1].order_status < 2)
-              this.showWhich = 1;
-            if (this.orderDetail[1].order_status == 2)
-              this.showWhich = 0;
-          } else {
-            this.showWhich = 0;
+              if (this.orderDetail[1].order_status >= 0 && this.orderDetail[1].order_status < 2)
+                  this.showWhich = 1;
+              if (this.orderDetail[1].order_status == 2)
+                  this.showWhich = 0;
           }
           loader.dismiss();
       });

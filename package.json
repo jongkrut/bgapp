@@ -22,6 +22,7 @@
     "@ionic-native/facebook": "^3.4.4",
     "@ionic-native/google-plus": "^3.4.4",
     "@ionic-native/in-app-browser": "^3.4.4",
+    "@ionic-native/market": "^3.4.4",
     "@ionic-native/mixpanel": "^3.4.4",
     "@ionic-native/push": "^3.4.4",
     "@ionic-native/social-sharing": "^3.4.4",

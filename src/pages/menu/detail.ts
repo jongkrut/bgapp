@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { ViewController, NavParams } from 'ionic-angular';
-import { InAppBrowser } from 'ionic-native';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import 'rxjs/add/operator/map';
 
@@ -61,7 +61,7 @@ export class DetailModal {
   url: any;
   menu_name: any;
 
-  constructor(public viewCtrl: ViewController, public http: Http, private navParams: NavParams, public socialSharing: SocialSharing) {
+  constructor(public viewCtrl: ViewController, public http: Http, private navParams: NavParams, public socialSharing: SocialSharing, private iab: InAppBrowser) {
     this.menu_id = navParams.get("menu_id");
     this.http.get('http://api.blackgarlic.id:7005/app/menu/id/' + this.menu_id).map(res => res.json())
       .subscribe(data => {
@@ -83,7 +83,7 @@ export class DetailModal {
   }
 
   openPDF() {
-    let browser = new InAppBrowser('https://bgpdf.kilatstorage.com/' + this.menu_id + ".pdf", '_system', 'location=yes');
+    this.iab.create('https://bgpdf.kilatstorage.com/' + this.menu_id + ".pdf", '_system', 'location=yes');
   }
 
   fbShare() {

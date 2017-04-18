@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Auth,User  } from '@ionic/cloud-angular';
-import { NavController, Platform,  NavParams,Events, App, Tabs } from 'ionic-angular';
-import { Market } from 'ionic-native';
+import { NavController, NavParams,Events, App, Tabs, Platform } from 'ionic-angular';
+import { Market } from '@ionic-native/market';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { AuthPage } from '../auth/auth';
 import { MenuPage } from '../menu/menu';
 import { SubsOrderPage } from '../subsorder/subsorder';
 import { SubsSaldoPage } from '../subssaldo/subssaldo';
@@ -11,8 +11,6 @@ import { SubsProfilePage } from '../subsprofile/subsprofile';
 import { ProfilePage } from '../profile/profile';
 import { WelcomePage } from '../welcome/welcome';
 import { FeedbackPage } from '../feedback/feedback';
-import { Http } from '@angular/http';
-import { SplashScreen } from '@ionic-native/splash-screen';
 
 declare var cordova:any;
 
@@ -32,22 +30,18 @@ export class SubsHomePage {
 
   tabParams: number = 0;
 
-  constructor(private platform: Platform, Platform, public splashScreen: SplashScreen, public navCtrl: NavController, public navParams : NavParams, public auth:Auth, private user : User) {
+  constructor(public navCtrl: NavController, public navParams : NavParams, public auth:Auth, private user : User, private platform: Platform, private splashScreen : SplashScreen) {
     this.tabParams = navParams.get("tabs");
   }
 
   ionViewDidLoad(){
-    this.platform.ready().then(() => {
-    this.splashScreen.hide();
-    let user = this.user.get('subscription',null);
-    let userd = this.user.get('customer',null);
-    if(user != null){
-      this.tab2Title = "Langganan";
-    }
-    if(userd.trial == "1"){
-      this.tab2Title = "Info Trial";
-    }
-   });
+      this.platform.ready().then(()=>{
+          this.splashScreen.hide();
+      });
+      let userd = this.user.get('customer',null);
+      if(userd.subscription_status == 0 && userd.trial == 1){
+          this.tab2Title = "Info Trial";
+      }
   }
 
   ionViewDidEnter(){
@@ -59,7 +53,6 @@ export class SubsHomePage {
       this.navCtrl.setRoot(WelcomePage);
     }
   }
-
 }
 
 
@@ -111,7 +104,7 @@ export class SubsMenuPage {
   pages: Array<{title: string, component: any, icon: string}>;
 
 
-  constructor(public navCtrl: NavController, private user : User, private auth: Auth, private events: Events, private app: App) { }
+  constructor(public navCtrl: NavController, private user : User, private auth: Auth, private events: Events, private app: App, private market: Market) { }
 
   ionViewDidLoad(){
     let user = this.user.get('subscription',null);
@@ -142,13 +135,12 @@ export class SubsMenuPage {
   }
 
   openStore(){
-      Market.open('com.blackgarlic.app');
+      this.market.open('com.blackgarlic.app');
   }
 
   logout() {
     this.auth.logout();
     this.events.publish('user:logout', Date());
-    this.app.getRootNav().push(WelcomePage);
-    cordova.plugins.intercom.reset();
+    this.app.getRootNav().setRoot(WelcomePage);
   }
 }

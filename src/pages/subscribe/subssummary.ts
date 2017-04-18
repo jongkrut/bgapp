@@ -18,6 +18,7 @@ export class SubssummaryPage {
     subscribe: any;
     total = 0;
     menuPrice: any;
+    diskon: any;
     order: any;
     date: any;
     buttonOrder: any = true;
@@ -28,29 +29,25 @@ export class SubssummaryPage {
         this.cart = this.subscribe.cart;
         this.date = moment.unix(this.subscribe.step1.delivery_date).locale("id").format('dddd, Do MMMM');
         this.subscribe.step1.delivery_day = moment.unix(this.subscribe.step1.delivery_date).locale("id").isoWeekday();
+        this.diskon = this.subscribe.cartDetail.diskon;
         this.total = this.subscribe.cartDetail.total_items;
         this.subscribe.user = user.get('customer', null);
     }
 
     subsSummary(): void {
         this.subscribeService.saveSubscribe(this.subscribe);
-
         let postData = { 'step1' : JSON.stringify(this.subscribe.step1), 'step2' : JSON.stringify(this.subscribe.step2), 'cart' : JSON.stringify(this.subscribe.cart), 'cartDetail' : JSON.stringify(this.subscribe.cartDetail), 'user' : JSON.stringify(this.subscribe.user)};
-        console.log(JSON.stringify(postData));
-
+        //console.log(JSON.stringify(postData));
         this.http.post(this.url, postData)
           .map(res => res.json())
           .subscribe(data => {
-              console.log('success')
-              console.log(data)
-
+              //console.log('success')
+              //console.log(data)
               this.user.set("subscription", data.subscription);
               this.user.set("customer", data.customer);
               this.user.save();
               this.events.publish('user:subscheckout',data, '4');
           });
-
-
         this.app.getRootNav().setRoot(SubsthanksPage);
      }
 }

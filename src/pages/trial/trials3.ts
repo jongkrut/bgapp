@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Content, LoadingController, Events} from 'ionic-angular';
-import { Http, Headers  } from '@angular/http';
+import { Http } from '@angular/http';
 import { SubscribeService } from '../../providers/subscribe-service';
 import { TrialStep4Page } from './trials4';
 import 'rxjs/add/operator/map';
