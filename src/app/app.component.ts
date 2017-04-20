@@ -22,16 +22,11 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   loggedIn: boolean = false;
-  rootPage: any = WalkthroughPage;
+  rootPage: any;
 
   constructor(private platform: Platform, private push: Push, private auth: Auth, private user: User, private http: Http,
               private alertCtrl: AlertController, private loadingCtrl: LoadingController, private events: Events,
               statusBar: StatusBar, splashScreen: SplashScreen, private mixpanel: Mixpanel, private mixpanelPeople: MixpanelPeople) {
-
-    let loading = this.loadingCtrl.create({
-      content: 'Initializing...'
-    });
-    loading.present();
 
     platform.ready().then(() => {
       statusBar.styleDefault();
@@ -89,8 +84,9 @@ export class MyApp {
             this.rootPage = HomePage;
           }
         });
+      } else {
+        this.rootPage = WalkthroughPage;
       }
-      loading.dismiss();
     });
 
     events.subscribe('user:login', (trial, subs_status, tipe_login) => {
@@ -172,16 +168,6 @@ export class MyApp {
       this.auth.logout();
     });
 
-    events.subscribe('user:subscribe', (trial, subs_status) => {
-      let userz = user.get("subscription", null);
-      this.registerPush(userz.subscription_id);
-      if (trial == "1" || subs_status == "1") {
-        this.rootPage = SubsHomePage;
-      } else {
-        this.rootPage = HomePage;
-      }
-    });
-
     events.subscribe('user:trial', (params, step) => {
       let userd = user.get("customer", null);
 
@@ -203,6 +189,8 @@ export class MyApp {
       let userd = user.get("customer", null);
       let userz = user.get("subscription", null);
 
+      this.registerPush(userz.subscription_id);
+
       this.mixpanel.init("e3f475813524ce395975a3b628b15773").then((data) => {
         this.mixpanelPeople.identify(userd.customer_id);
         if (userz) {
@@ -210,6 +198,7 @@ export class MyApp {
           let subs_added = userz.added;
 
           this.mixpanelPeople.set({
+            "$subscription_status" : 1,
             "$subscriptionId": subs_id,
             "$subscription_date": subs_added
           });

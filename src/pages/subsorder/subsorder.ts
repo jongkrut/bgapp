@@ -32,8 +32,17 @@ export class SubsOrderPage {
       private loadingCtrl: LoadingController, private alertCtrl: AlertController, private events: Events, private modalCtrl: ModalController, private tabs: Tabs) { }
 
   ionViewDidLoad() {
-      this.subscription = this.user.get('subscription', null);
       this.customer_id = this.user.get('customer', null).customer_id;
+      this.events.subscribe('menu-update', () => {
+          this.reloadMenu();
+      });
+      this.events.subscribe('saldobg:update', () => {
+          this.saldobg = this.user.get('customer', null).balance;
+      });
+  }
+
+  ionViewDidEnter(){
+      this.subscription = this.user.get('subscription', null);
       this.saldobg = this.user.get('customer', null).balance;
       this.trial = this.user.get('customer', null).trial;
 
@@ -41,14 +50,6 @@ export class SubsOrderPage {
           this.subscriptionStatus = true;
       else
           this.subscriptionStatus = false;
-
-      this.events.subscribe('menu-update', () => {
-          this.reloadMenu();
-      });
-      this.events.subscribe('saldobg:update', () => {
-          this.saldobg = this.user.get('customer', null).balance;
-      });
-
       this.reloadMenu();
   }
 
@@ -144,7 +145,7 @@ export class SubsOrderPage {
   unskip(order_id, ind) {
     let order_data = { order_id: order_id, delivery: 1 };
     let loader = this.loadingCtrl.create({
-      content: "Skipping ..."
+      content: "Unskipping ..."
     });
     loader.present;
     this.http.post("http://api.blackgarlic.id:7005/app/order/skip/", order_data).map(res => res.json()).subscribe(data => {
@@ -168,12 +169,14 @@ export class SubsOrderPage {
     };
     let modal = this.modalCtrl.create(EditOrderAddress, { order_id: order_id, address: address_detail });
     modal.onDidDismiss(data => {
-      this.orderDetail[ind].customer_name = data.customer_name;
-      this.orderDetail[ind].address_content = data.address_content;
-      this.orderDetail[ind].mobile = data.mobile;
-      this.orderDetail[ind].city = data.city;
-      this.orderDetail[ind].zipcode = data.zipcode;
-      this.orderDetail[ind].address_notes = data.address_notes;
+      if(typeof data != 'undefined') {
+        this.orderDetail[ind].customer_name = data.customer_name;
+        this.orderDetail[ind].address_content = data.address_content;
+        this.orderDetail[ind].mobile = data.mobile;
+        this.orderDetail[ind].city = data.city;
+        this.orderDetail[ind].zipcode = data.zipcode;
+        this.orderDetail[ind].address_notes = data.address_notes;
+      }
     });
     modal.present();
   }
@@ -350,7 +353,7 @@ export class EditOrderAddress {
   saveAddress() {
       let order_detail = { order_id: this.type, details: this.details };
       let loader = this.loadingCtrl.create({
-          content: "Skipping ..."
+          content: "Saving ..."
       });
       loader.present();
       this.http.post("http://api.blackgarlic.id:7005/app/order/address/", order_detail).map(res => res.json()).subscribe(data => {

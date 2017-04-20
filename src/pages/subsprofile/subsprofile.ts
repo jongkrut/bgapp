@@ -40,6 +40,7 @@ export class SubsProfilePage {
               this.http.post("http://api.blackgarlic.id:7005/app/subscription/pause/", postData).map(res => res.json()).subscribe(data => {
                   if(data.status > 0) {
                     this.subscription.subscription_status = data.status;
+                    this.user.set("subscription", this.subscription);
                     this.user.save();
                     this.subscription = this.user.get('subscription',null);
                   }
@@ -127,6 +128,7 @@ export class SubsProfilePage {
                   <ion-item>
                     <ion-label>Jumlah Menu per Pengiriman</ion-label>
                     <ion-select [(ngModel)]="postData.totalmenu" name="totalmenu">
+                      <ion-option value="2">2</ion-option>
                       <ion-option value="3">3</ion-option>
                       <ion-option value="4">4</ion-option>
                       <ion-option value="5">5</ion-option>

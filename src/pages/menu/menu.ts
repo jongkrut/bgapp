@@ -42,7 +42,7 @@ export class MenuPage {
 
   loadMenu(){
       let loader = this.loadingCtrl.create({
-        content: "Skipping ..."
+        content: "Loading ..."
       });
       loader.present();
 

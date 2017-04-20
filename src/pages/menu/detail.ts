@@ -63,19 +63,14 @@ export class DetailModal {
 
   constructor(public viewCtrl: ViewController, public http: Http, private navParams: NavParams, public socialSharing: SocialSharing, private iab: InAppBrowser) {
     this.menu_id = navParams.get("menu_id");
-    this.http.get('http://api.blackgarlic.id:7005/app/menu/id/' + this.menu_id).map(res => res.json())
-      .subscribe(data => {
-        this.menu = JSON.parse(data);
+    this.http.get('http://api.blackgarlic.id:7005/app/menu/id/' + this.menu_id).map(res => res.json()).subscribe(data => {
+          this.menu = JSON.parse(data);
           this.menu_name = this.menu.menu_name;
           console.log(this.menu, this.menu_name)
           this.message = this.menu_name + ' hanya ada di BlackGarlic!';
           this.image = 'http://bgmenu.kilatstorage.com/' + this.menu_id + '.jpg';
-          this.url = 'https://blackgarlic.id/menu/' + this.menu_name.split(' ').join('-') + '/';
-
+          this.url = 'https://blackgarlic.id/menu/' + this.menu.menu_url + '/';
       });
-
-
-
   }
 
   dismiss() {
