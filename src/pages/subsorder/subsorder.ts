@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, ViewController, NavParams, LoadingController, App, AlertController, Events, ModalController, Tabs} from 'ionic-angular';
+import { NavController, Platform, ViewController, NavParams, LoadingController, App, AlertController, Events, ModalController, Tabs} from 'ionic-angular';
 import { Auth, User } from '@ionic/cloud-angular';
 import * as moment from 'moment';
 import 'moment/locale/id';
@@ -85,8 +85,8 @@ export class SubsOrderPage {
       });
   }
   doRefresh(refresher) {
-      refresher.complete();
-      this.reloadMenu();
+    refresher.complete();
+    this.reloadMenu();
   }
 
   skip(order_id, ind) {
@@ -168,12 +168,12 @@ export class SubsOrderPage {
     };
     let modal = this.modalCtrl.create(EditOrderAddress, { order_id: order_id, address: address_detail });
     modal.onDidDismiss(data => {
-      this.orderDetail[ind].customer_name = data.customer_name;
-      this.orderDetail[ind].address_content = data.address_content;
-      this.orderDetail[ind].mobile = data.mobile;
-      this.orderDetail[ind].city = data.city;
-      this.orderDetail[ind].zipcode = data.zipcode;
-      this.orderDetail[ind].address_notes = data.address_notes;
+      // this.orderDetail[ind].customer_name = data.customer_name;
+      // this.orderDetail[ind].address_content = data.address_content;
+      // this.orderDetail[ind].mobile = data.mobile;
+      // this.orderDetail[ind].city = data.city;
+      // this.orderDetail[ind].zipcode = data.zipcode;
+      // this.orderDetail[ind].address_notes = data.address_notes;
     });
     modal.present();
   }

@@ -35,9 +35,6 @@ export class SubsHomePage {
   }
 
   ionViewDidLoad(){
-      this.platform.ready().then(()=>{
-          this.splashScreen.hide();
-      });
       let userd = this.user.get('customer',null);
       if(userd.subscription_status == 0 && userd.trial == 1){
           this.tab2Title = "Info Trial";
@@ -51,6 +48,10 @@ export class SubsHomePage {
   ionViewCanEnter() {
     if(!this.auth.isAuthenticated()) {
       this.navCtrl.setRoot(WelcomePage);
+    }else{
+      this.platform.ready().then(()=>{
+          this.splashScreen.hide();
+      });
     }
   }
 }
