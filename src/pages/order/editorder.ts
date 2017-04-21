@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, LoadingController, Events, ToastController,Content } from 'ionic-angular';
+import { Nav, NavController, NavParams, LoadingController, Events, App, Platform, AlertController, ToastController,Content } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { User } from '@ionic/cloud-angular';
+import { SubsHomePage } from '../subshome/subshome';
 
 @Component({
   selector : 'edit-order',
@@ -9,6 +10,7 @@ import { User } from '@ionic/cloud-angular';
 })
 export class EditOrderPage {
   @ViewChild(Content) content: Content;
+  @ViewChild(Nav) nav: Nav;
 
   menus: any = [];
   cart : any = [];
@@ -17,11 +19,38 @@ export class EditOrderPage {
   order_id : number;
   carttotal : number = 0;
 
-  constructor(public navParams: NavParams, private http: Http, private navCtrl:NavController, private loadingCtrl: LoadingController, private events: Events,private toastCtrl: ToastController, private user: User) {
+  constructor(public navParams: NavParams, private http: Http, private navCtrl:NavController,private app: App, private platform: Platform,
+              private alertCtrl: AlertController, private loadingCtrl: LoadingController, private events: Events,private toastCtrl: ToastController, private user: User) {
       let loading = this.loadingCtrl.create({
         content: 'Loading up menus...'
       });
       loading.present();
+
+      platform.registerBackButtonAction(() => {
+
+        let ttl = "Konfirmasi";
+        let msg = "Anda ingin simpan perubahan?";
+
+        let alert = this.alertCtrl.create({
+          title: ttl,
+          message: msg,
+          buttons: [
+            {
+              text: 'Batal',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+                  this.navCtrl.canGoBack();
+              }
+            }, {
+              text: 'Ya',
+              handler: () => {
+                this.saveOrder();
+              }
+            }]
+        });
+        alert.present();
+       });
 
       this.order_id = navParams.get('order_id');
       this.box_id = navParams.get('box_id');
