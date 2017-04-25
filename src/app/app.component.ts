@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, AlertController, LoadingController, Events } from 'ionic-angular';
+import { Nav, Platform, AlertController, App, LoadingController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Push, RegistrationEventResponse, NotificationEventResponse } from '@ionic-native/push';
@@ -13,9 +13,6 @@ import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 import { SubsHomePage } from '../pages/subshome/subshome';
 import { HomePage } from '../pages/home/home';
 
-import 'intl';
-import 'intl/locale-data/jsonp/en';
-
 declare var cordova: any;
 
 @Component({
@@ -25,9 +22,9 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   loggedIn: boolean = false;
-  rootPage: any = WalkthroughPage;
+  rootPage: any;
 
-  constructor(private platform: Platform, private push: Push, private auth: Auth, private user: User, private http: Http,
+  constructor(private platform: Platform, private push: Push, private auth: Auth, private user: User, private http: Http, private app: App,
               private alertCtrl: AlertController, private loadingCtrl: LoadingController, private events: Events,
               statusBar: StatusBar, splashScreen: SplashScreen, private mixpanel: Mixpanel, private mixpanelPeople: MixpanelPeople) {
 
@@ -56,9 +53,12 @@ export class MyApp {
           this.mixpanel.init("e3f475813524ce395975a3b628b15773").then((data) => {
             let subs_id = 0;
             let subs_added = 0;
+            let subs_status = 0;
+
             if (userz != null) {
               subs_id = userz.subscription_id;
               subs_added = userz.added;
+              subs_status = userd.subscription_status;
             }
             this.mixpanelPeople.identify(userd.customer_id);
             this.mixpanelPeople.set({
@@ -71,6 +71,7 @@ export class MyApp {
               "$trial": userd.trial,
               "$signup_date": userd.added,
               "$subscription_date": subs_added,
+              "$subscription_status" : subs_status,
               "$referral_code": userd.customer_code
             });
           });
@@ -92,6 +93,8 @@ export class MyApp {
             this.rootPage = HomePage;
           }
         });
+      } else {
+        this.rootPage = WalkthroughPage;
       }
       loading.dismiss();
     });
@@ -149,6 +152,7 @@ export class MyApp {
           "$trial": userd.trial,
           "$signup_date": userd.added,
           "$subscription_date": subs_added,
+          "$subscription_status" : userd.subscription_status,
           "$referral_code": userd.customer_code
         });
 
@@ -175,16 +179,6 @@ export class MyApp {
       this.auth.logout();
     });
 
-    events.subscribe('user:subscribe', (trial, subs_status) => {
-      let userz = user.get("subscription", null);
-      this.registerPush(userz.subscription_id);
-      if (trial == "1" || subs_status == "1") {
-        this.rootPage = SubsHomePage;
-      } else {
-        this.rootPage = HomePage;
-      }
-    });
-
     events.subscribe('user:trial', (params, step) => {
       let userd = user.get("customer", null);
 
@@ -205,6 +199,7 @@ export class MyApp {
     events.subscribe('user:subscheckout', (params, step) => {
       let userd = user.get("customer", null);
       let userz = user.get("subscription", null);
+      this.registerPush(userz.subscription_id);
 
       this.mixpanel.init("e3f475813524ce395975a3b628b15773").then((data) => {
         this.mixpanelPeople.identify(userd.customer_id);
@@ -213,6 +208,7 @@ export class MyApp {
           let subs_added = userz.added;
 
           this.mixpanelPeople.set({
+            "$subscription_status": userd.subscription_status,
             "$subscriptionId": subs_id,
             "$subscription_date": subs_added
           });

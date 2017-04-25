@@ -48,9 +48,6 @@ import { Mixpanel,MixpanelPeople } from '@ionic-native/mixpanel';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Market } from '@ionic-native/market';
 
-import 'intl';
-import 'intl/locale-data/jsonp/en';
-
 const cloudSettings: CloudSettings = {
   'core': {
     'app_id': 'a2fa45cd'
@@ -76,13 +73,7 @@ const cloudSettings: CloudSettings = {
   imports: [
     HttpModule,
     BrowserModule,
-    IonicModule.forRoot(MyApp, {
-      platforms: {
-        ios: { backButtonText: '',
-               backButtonIcon: 'ios-arrow-back',
-               iconMode: 'ios'}
-      }
-    }),
+    IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     CloudModule.forRoot(cloudSettings),
   ],

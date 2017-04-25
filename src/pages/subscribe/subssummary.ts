@@ -42,7 +42,7 @@ export class SubssummaryPage {
           .map(res => res.json())
           .subscribe(data => {
               //console.log('success')
-              //console.log(data)
+              console.log(data)
               this.user.set("subscription", data.subscription);
               this.user.set("customer", data.customer);
               this.user.save();
