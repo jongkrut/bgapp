@@ -1,7 +1,8 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      <img src="assets/logoheader.png" style="height:auto;width:25px;float:left;margin-right:5px"/>
+      <img src="assets/logoheader.png" style="height:auto;width:25px;float:left;" showWhen="android,windows" />
+      <img src="assets/logoheader.png" style="height:auto;width:25px;position:absolute;left:25px;top:45%;" showWhen="ios" />
       <div style="float:right">
         Menu Terbaru
       </div>
@@ -28,42 +29,18 @@
 
   <div [ngSwitch]="week">
 
-  <div class="week_txt" *ngSwitchCase="week_ids[0]">
+    <div class="week_txt" *ngSwitchCase="week_ids[0]">
       Pengiriman untuk:<br/>
       <span *ngIf="week_ids[0]">{{menus1[0].box_start | date : 'MMM dd' }} - {{menus1[0].box_end | date : 'MMM dd' }}</span>
-  </div>
+    </div>
 
-  <ul *ngSwitchCase="week_ids[0]">
-    <li *ngFor="let menu of menus1" (click)="openDetail(menu.menu_id)">
+    <ul *ngSwitchCase="week_ids[0]">
+      <li *ngFor="let menu of menus1" (click)="openDetail(menu.menu_id)">
         <ion-row>
           <ion-col width-33>
             <img src="http://bgmenu.kilatstorage.com/{{menu.menu_id}}.jpg" />
           </ion-col>
-          <ion-col width-67>
-              <div class="menu_tags" *ngIf="menu.menu_type == 3">
-                MENU UTAMA
-              </div>
-              <div class="menu_tags" *ngIf="menu.menu_type > 3">
-                MENU LAIN-LAIN
-              </div>
-              {{menu.menu_name}}
-          </ion-col>
-        </ion-row>
-    </li>
-  </ul>
-
-  <div class="week_txt" *ngSwitchCase="week_ids[1]">
-      Menu Mingguan<br/>
-      <span *ngIf="week_ids[1]">{{menus2[0].box_start | date }} - {{menus2[0].box_end | date }}</span>
-  </div>
-
-  <ul *ngSwitchCase="week_ids[1]">
-    <li *ngFor="let menu of menus2" (click)="openDetail(menu.menu_id)">
-      <ion-row>
-        <ion-col width-33>
-          <img src="http://bgmenu.kilatstorage.com/{{menu.menu_id}}.jpg" />
-        </ion-col>
-        <ion-col width-67>
+          <ion-col width-62>
             <div class="menu_tags" *ngIf="menu.menu_type == 3">
               MENU UTAMA
             </div>
@@ -71,10 +48,42 @@
               MENU LAIN-LAIN
             </div>
             {{menu.menu_name}}
+          </ion-col>
+          <br><br><br><br>
+          <ion-grid class="detail_menu">
+          <ion-col bottom width-5 >
+            <button ion-button color="dark" clear item-right>
+              <ion-icon name="open"></ion-icon>
+            </button>
         </ion-col>
-      </ion-row>
-    </li>
-  </ul>
+        </ion-grid>
+        </ion-row>
+      </li>
+    </ul>
+
+    <div class="week_txt" *ngSwitchCase="week_ids[1]">
+      Menu Mingguan<br/>
+      <span *ngIf="week_ids[1]">{{menus2[0].box_start | date }} - {{menus2[0].box_end | date }}</span>
+    </div>
+
+    <ul *ngSwitchCase="week_ids[1]">
+      <li *ngFor="let menu of menus2" (click)="openDetail(menu.menu_id)">
+        <ion-row>
+          <ion-col width-33>
+            <img src="http://bgmenu.kilatstorage.com/{{menu.menu_id}}.jpg" />
+          </ion-col>
+          <ion-col width-67>
+            <div class="menu_tags" *ngIf="menu.menu_type == 3">
+              MENU UTAMA
+            </div>
+            <div class="menu_tags" *ngIf="menu.menu_type > 3">
+              MENU LAIN-LAIN
+            </div>
+            {{menu.menu_name}}
+          </ion-col>
+        </ion-row>
+      </li>
+    </ul>
 
   </div>
 

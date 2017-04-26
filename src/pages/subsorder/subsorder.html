@@ -38,7 +38,9 @@
   <div *ngIf="subscription == null">
     <div *ngFor="let order of orderD; let i = index;">
       <ion-card padding>
-        <div class="placeholder" (click)="showWhich = i" *ngIf="showWhich != i">{{order.order_date}}</div>
+        <div class="placeholder" (click)="showWhich= i" *ngIf="showWhich != i">
+            {{order.order_date}}
+        </div>
         <div class="order_id">Order #{{order.unique_id}}</div>
         <div class="order_status">
             <span *ngIf="order.order_status == 0">Menunggu Pembayaran</span>
@@ -128,7 +130,9 @@
     <div *ngFor="let detail of orderDetail; let i = index;">
       <ion-card padding>
         <div class="placeholder" (click)="showWhich = i" *ngIf="showWhich != i">
-          {{detail.order_date}}
+          <span *ngIf="i == 0">Box Selanjutnya </span>
+          <span *ngIf="i == 1">Box Sebelumnya </span>
+          ({{detail.order_day}}, {{detail.order_date}})
         </div>
 
         <div class="order_id">

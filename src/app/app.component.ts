@@ -13,6 +13,9 @@ import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 import { SubsHomePage } from '../pages/subshome/subshome';
 import { HomePage } from '../pages/home/home';
 
+import 'intl';
+import 'intl/locale-data/jsonp/en';
+
 declare var cordova: any;
 
 @Component({
