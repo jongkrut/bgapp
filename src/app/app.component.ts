@@ -198,20 +198,13 @@ export class MyApp {
       let userz = user.get("subscription", null);
       this.registerPush(userz.subscription_id);
 
-      this.registerPush(userz.subscription_id);
-
       this.mixpanel.init("e3f475813524ce395975a3b628b15773").then((data) => {
         this.mixpanelPeople.identify(userd.customer_id);
         if (userz) {
           let subs_id = userz.subscription_id;
           let subs_added = userz.added;
-
           this.mixpanelPeople.set({
-<<<<<<< HEAD
-            "$subscription_status" : 1,
-=======
             "$subscription_status": userd.subscription_status,
->>>>>>> bgapptest
             "$subscriptionId": subs_id,
             "$subscription_date": subs_added
           });

@@ -169,7 +169,6 @@ export class SubsOrderPage {
     };
     let modal = this.modalCtrl.create(EditOrderAddress, { order_id: order_id, address: address_detail });
     modal.onDidDismiss(data => {
-<<<<<<< HEAD
       if(typeof data != 'undefined') {
         this.orderDetail[ind].customer_name = data.customer_name;
         this.orderDetail[ind].address_content = data.address_content;
@@ -178,14 +177,6 @@ export class SubsOrderPage {
         this.orderDetail[ind].zipcode = data.zipcode;
         this.orderDetail[ind].address_notes = data.address_notes;
       }
-=======
-      // this.orderDetail[ind].customer_name = data.customer_name;
-      // this.orderDetail[ind].address_content = data.address_content;
-      // this.orderDetail[ind].mobile = data.mobile;
-      // this.orderDetail[ind].city = data.city;
-      // this.orderDetail[ind].zipcode = data.zipcode;
-      // this.orderDetail[ind].address_notes = data.address_notes;
->>>>>>> bgapptest
     });
     modal.present();
   }
