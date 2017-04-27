@@ -20,6 +20,7 @@ export class SubsSaldoPage {
   nextorder : number = 0;
   bca_va : string = '';
   permata_va : string = '';
+  autotopup : number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private user : User, private loadingCtrl : LoadingController, public modalCtrl : ModalController, private http: Http, private events: Events, private tabs: Tabs) {
     this.customer_id = user.get('customer',null).customer_id;
@@ -27,6 +28,9 @@ export class SubsSaldoPage {
     this.customer_code = user.get('customer',null).customer_code;
     this.bca_va = "74100 "+("000000000"+this.customer_id).slice(-11);
     this.permata_va = "8545 5600 "+("000000000"+this.customer_id).slice(-8);
+    this.autotopup = user.get('subscription', null);
+
+console.log(this.autotopup)
 
     http.get('http://api.blackgarlic.id:7005/app/saldobg/'+this.customer_id).map(res => res.json())
       .subscribe(data => {

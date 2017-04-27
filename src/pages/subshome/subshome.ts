@@ -88,7 +88,7 @@ export class SubsHomePage {
                 <ion-list-header>LAINNYA</ion-list-header>
                 <button menuClose ion-item (click)="openStore()">
                   <ion-icon name="appstore" item-left></ion-icon>
-                  Rate App
+                  Rate App v 1.0.0
                 </button>
                 <button menuClose ion-item (click)="logout()">
                   <ion-icon name="exit" item-left></ion-icon>

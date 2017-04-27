@@ -1,5 +1,10 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton>
+      <ion-buttons left>
+          <button ion-button (click)="goBack()">
+              <ion-icon class="customIcon" name="arrow-back"></ion-icon>
+          </button>
+      </ion-buttons>
     <ion-title>Ubah Menu</ion-title>
   </ion-navbar>
 </ion-header>

@@ -37,10 +37,10 @@
     <ul *ngSwitchCase="week_ids[0]">
       <li *ngFor="let menu of menus1" (click)="openDetail(menu.menu_id)">
         <ion-row>
-          <ion-col width-33>
+          <ion-col>
             <img src="http://bgmenu.kilatstorage.com/{{menu.menu_id}}.jpg" />
           </ion-col>
-          <ion-col width-62>
+          <ion-col>
             <div class="menu_tags" *ngIf="menu.menu_type == 3">
               MENU UTAMA
             </div>
@@ -49,15 +49,13 @@
             </div>
             {{menu.menu_name}}
           </ion-col>
-          <br><br><br><br>
-          <ion-grid class="detail_menu">
-          <ion-col bottom width-5 >
-            <button ion-button color="dark" clear item-right>
-              <ion-icon name="open"></ion-icon>
-            </button>
-        </ion-col>
-        </ion-grid>
         </ion-row>
+            <ion-grid class="detail_menu">
+              <ion-col col-1 offset-11 no-padding text-center>
+                  <ion-icon name="open"></ion-icon>
+              </ion-col>
+            </ion-grid>
+
       </li>
     </ul>
 
@@ -81,14 +79,13 @@
             </div>
             {{menu.menu_name}}
           </ion-col>
-          <br><br><br><br>
-          <ion-grid class="detail_menu">
-          <ion-col bottom width-5 >
-            <button ion-button color="dark" clear item-right>
+          <ion-grid>
+            <ion-col class="detail_menu">
+              <button ion-button color="dark" clear>
               <ion-icon name="open"></ion-icon>
             </button>
-        </ion-col>
-        </ion-grid>
+            </ion-col>
+          </ion-grid>
         </ion-row>
       </li>
     </ul>

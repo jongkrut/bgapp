@@ -28,8 +28,8 @@ export class EditOrderPage {
 
       platform.registerBackButtonAction(() => {
 
-        let ttl = "Konfirmasi";
-        let msg = "Anda ingin simpan perubahan?";
+        let ttl = "Anda ingin kembali?";
+        let msg = "Perubahan data Anda tidak akan tersimpan.";
 
         let alert = this.alertCtrl.create({
           title: ttl,
@@ -40,17 +40,18 @@ export class EditOrderPage {
               role: 'cancel',
               handler: () => {
                 console.log('Cancel clicked');
-                  this.navCtrl.canGoBack();
               }
             }, {
               text: 'Ya',
               handler: () => {
-                this.saveOrder();
+                this.navCtrl.setRoot(SubsHomePage, { tabs: 1 });
               }
             }]
         });
         alert.present();
        });
+
+
 
       this.order_id = navParams.get('order_id');
       this.box_id = navParams.get('box_id');
@@ -138,6 +139,29 @@ export class EditOrderPage {
     }
   }
 
+ goBack(){
+   let ttl = "Anda ingin kembali?";
+   let msg = "Perubahan data Anda tidak akan tersimpan.";
+
+   let alert = this.alertCtrl.create({
+     title: ttl,
+     message: msg,
+     buttons: [
+       {
+         text: 'Batal',
+         role: 'cancel',
+         handler: () => {
+           console.log('Cancel clicked');
+         }
+       }, {
+         text: 'Ya',
+         handler: () => {
+           this.navCtrl.setRoot(SubsHomePage, { tabs: 1 });
+         }
+       }]
+   });
+   alert.present();
+ }
   saveOrder(){
     let customer = this.user.get("customer",null);
     let loading = this.loadingCtrl.create({
