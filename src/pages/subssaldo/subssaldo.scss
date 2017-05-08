@@ -5,13 +5,32 @@ page-subssaldo {
     background-color:#00caab;
 
   }
+  .creditcard {
+    background-color:#00caab;
+    padding:40px 20px;
+    border-radius:10px;
+    color:#fafafa;
+    float: center;
+    font-size: 15px;
+  }
   .saldo_cont {
     background-color: rgba(255,255,255,0.9);
     border-radius:5px;
     color:#666;
     font-size:12px;
   }
-
+  .autotopup_cont {
+    background-color: rgba(255,255,255,0.9);
+    color:#666;
+    font-size:11px;
+    line-height:18px;
+  }
+  .saldocont {
+    background-color: rgba(255,255,255,0.9);
+    border-radius:3px;
+    color:#666;
+    font-size:14px;
+  }
   .saldobg_content {
     margin-top:5px;
     font-size:24px;
@@ -92,7 +111,18 @@ page-subssaldo {
     background-color: #03c9a9;
     color:#fafafa;
   }
-
+  .autotopup-btn {
+    float:right;
+    margin-right:2px;
+    height:30px;
+    border-radius:30px;
+    font-weight:500;
+    padding:0 10px;
+    margin-top:2px;
+    background-color: #03c9a9;
+    color:#fafafa;
+    font-size:11px;
+  }
   table {
     width:100%;
     border-collapse: collapse;
@@ -117,6 +147,13 @@ page-subssaldo {
       color:#666 !important;
       margin-top:15px;
   }
+
+  .autotopup {
+        background-color:#fff;
+        color:#666 !important;
+        margin-bottom: 0;
+    }
+
   .nextorder_val {
     font-weight:700;
     color:#03c9a9 !important;

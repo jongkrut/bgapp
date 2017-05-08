@@ -30,6 +30,9 @@ export class AuthPage {
       let loginOptions = { 'inAppBrowserOptions': {'hidden': true} };
 
       this.auth.login('custom', loginData, loginOptions).then(() => {
+        this.http.get('http://api.blackgarlic.id:7005/app/user/' + this.user.get('customer',null).customer_id).map(res => res.json()).subscribe(data => {
+          this.user.set("customer", data[0]);
+          this.user.save();
           loader.dismiss();
           console.log(this.user)
 
@@ -44,6 +47,7 @@ export class AuthPage {
           } else {
             this.navCtrl.setRoot(HomePage);
           }
+        });
 
       }, (err) => {
           loader.dismiss();

@@ -5,7 +5,7 @@
 </ion-header>
 
 
-<ion-content >
+<ion-content>
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -14,10 +14,10 @@
   <div padding>
     <div class="saldobg_cont" padding>
       <div class="saldo_cont" padding>
-          SaldoBG anda saat ini:
-          <div class="saldobg_content">
-            IDR {{saldobg | number :'1.0-0'}}
-          </div>
+        SaldoBG anda saat ini:
+        <div class="saldobg_content">
+          IDR {{saldobg | number :'1.0-0'}}
+        </div>
       </div>
     </div>
 
@@ -35,41 +35,82 @@
       </ion-row>
     </div>
   </div>
-  <!-- <div class="nextorder_cont" padding>
-    <ion-row no-padding>
-      <div class="saldo_cont" padding>
-          Status Auto Top Up anda saat ini:
-          <span *ngIf="autotopup == 1" ion-text color="secondary">Aktif</span>
-          <span *ngIf="autotopup == 0" ion-text color="danger">Stopped</span>
-      </div>
-      <ion-col col-6 class="ref_l">
-        Aktifkan Auto Top Up Anda
-        Untuk pembayaran yang lebih mudah
-      </ion-col>
-      <ion-col class="ref_c">
-        <ion-col nowrap no-padding>
-          <button class="share-btn" *ngIf="autotopup == 0" (click)="autotop()">Aktifkan</button>
-          <button class="share-btn" *ngIf="autotopup == 1" (click)="autotop()">Matikan</button>
-        </ion-col>
-      </ion-col>
-    </ion-row>
-  </div> -->
-
-
 
   <div padding-horizontal>
-      <ion-segment [(ngModel)]="listtype">
-        <ion-segment-button value="topup" >
-            Topup
-        </ion-segment-button>
-        <ion-segment-button value="history">
-            Riwayat
-        </ion-segment-button>
-      </ion-segment>
+    <ion-segment [(ngModel)]="listtype">
+      <ion-segment-button value="autotopup">
+        Auto-Topup
+      </ion-segment-button>
+      <ion-segment-button value="topup">
+        Manual-Topup
+      </ion-segment-button>
+      <ion-segment-button value="history">
+        Riwayat
+      </ion-segment-button>
+    </ion-segment>
   </div>
 
 
   <div [ngSwitch]="listtype" padding>
+    <div *ngSwitchCase="'autotopup'" class="autotopup" padding>
+      <ion-row *ngIf="autotopup == 0" no-padding>
+        <ion-col class="saldo_cont" col-6>
+          <br>
+          <img src="https://blackgarlic.id/inc/images/saldobg/creditcardbg.png" />
+        </ion-col>
+        <ion-col class="saldocont" col-6 style="color:#03c9a9;">
+          <b>Baru! Auto-Topup dengan Credit Card</b>
+          <ion-col class="autotopup_cont" col-6>
+            <p>Tambahkan credit card Anda, dan SaldoBG Anda akan terisi ulang secara otomatis sekali seminggu sebesar jumlah yang diperlukan.</p>
+          </ion-col>
+        </ion-col>
+        <ion-col class="saldo_cont" style="font-size:12px; line-height:17px;" col-5>
+          Status Auto Top Up :
+          <span *ngIf="autotopup == 0" ion-text color="danger">  Non Aktif</span>
+        </ion-col>
+        <ion-col class="ref_c" col-7 style="float:right;">
+          <button class="autotopup-btn" *ngIf="autotopup == 0" (click)="topup(1)">Tambahkan Credit Card</button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="autotopup == 1 || autotopup ==2" no-padding>
+        <ion-col class="saldo_cont">
+          <p style="text-align: center; padding:0">Kartu Anda telah tersimpan</p>
+          <div class="creditcard">
+            <div><ion-icon name="checkmark-circle" style="font-size:40px;"></ion-icon></div>
+            <div style="font-weight:100;margin-top:25px;">Card Number</div>
+            <div>**** **** **** </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="autotopup == 1 || autotopup ==2" style="margin-top:30px;" no-padding>
+        <ion-col class="saldo_cont" style="font-size:12px; line-height:17px;" col-5>
+          Status Auto Top Up :
+          <span *ngIf="autotopup == 1" ion-text color="secondary">  Aktif</span>
+          <span *ngIf="autotopup == 0" ion-text color="danger">  Non Aktif</span>
+          <span *ngIf="autotopup == 2" ion-text color="danger">  Paused</span>
+        </ion-col>
+        <ion-col class="ref_c" col-7 style="float:right;">
+          <button class="autotopup-btn" *ngIf="autotopup == 2" (click)="topup(1)">Aktifkan Auto-Topup</button>
+          <button class="autotopup-btn" *ngIf="autotopup == 1" (click)="topup(2)">Matikan Auto-Topup</button>
+        </ion-col>
+      </ion-row>
+    </div>
+    <br>
+    <div *ngSwitchCase="'autotopup'" class="autotopup" padding>
+      <ion-row no-padding>
+        <ion-col class="autotopup_cont" col-12 no-padding>
+          <b style="font-size:14px;">Syarat & Ketentuan tentang Auto Topup :</b>
+          <ul style="padding-left:14px;">
+            <li>Hanya menerima Kartu Kredit berlogo Visa dan MasterCard.</li>
+            <li>BlackGarlic tidak menyimpan kartu kredit Anda. Informasi kartu kredit Anda tersimpan di DOKU.</li>
+            <li>Pastikan limit kartu kredit Anda cukup sebelum hari pemotongan.</li>
+            <li>Apabila Anda mau menghapus atau mengganti nomor kartu kredit Anda, silahkan menghubungi Customer Service kami.</li>
+            <li>Hari topup akan dipilih sesuai hari penarikan SaldoBG, yaitu 2 hari sebelum hari pengiriman box Anda, dan tidak bisa diubah lagi. Namun Anda bisa berhenti Auto-Topup kapan saja.
+            </li>
+          </ul>
+        </ion-col>
+      </ion-row>
+    </div>
 
     <span *ngIf="customer_code  != ''">
       <div *ngSwitchCase="'topup'" padding class="ref_contz">
@@ -130,7 +171,7 @@
 
 
 
-    <ion-list *ngSwitchCase="'history'" >
+    <ion-list *ngSwitchCase="'history'">
       <table>
         <tr>
           <th>Tanggal</th>
@@ -139,8 +180,7 @@
         </tr>
         <tr *ngFor="let hist of history">
           <td>
-            {{hist.datetime | date : 'y-MM-dd'}}<br/>
-            {{hist.datetime | date : 'HH:mm'}}
+            {{hist.datetime | date : 'y-MM-dd'}}<br/> {{hist.datetime | date : 'HH:mm'}}
           </td>
           <td>
             <span *ngIf="hist.log_type == 2" style="color:red">

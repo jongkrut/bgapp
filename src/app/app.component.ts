@@ -259,7 +259,9 @@ export class MyApp {
   registerPush(subs_id) {
     let pushz = this.push.init({
       android: {
-        senderID: '312659605922'
+        senderID: '312659605922',
+        icon: 'icon',
+        iconColor : '#03c9a9'
       }, ios: {
         alert: 'true',
         badge: true,
