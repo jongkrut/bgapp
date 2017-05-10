@@ -27,6 +27,8 @@ export class SubsSaldoPage {
   permata_va: string = '';
   autotopup: number;
   subscription_id: number;
+  saldobgexp: any;
+  referral_list: any = {};
 
   constructor(private iab: InAppBrowser, public viewCtrl: ViewController, public alertCtrl: AlertController, public navCtrl: NavController, private toastCtrl: ToastController, public navParams: NavParams, private user: User, private loadingCtrl: LoadingController, public modalCtrl: ModalController, private http: Http, private events: Events, private tabs: Tabs) {
     this.customer_id = user.get('customer', null).customer_id;
@@ -36,12 +38,13 @@ export class SubsSaldoPage {
     this.bca_va = "74100 " + ("000000000" + this.customer_id).slice(-11);
     this.permata_va = "8545 5600 " + ("000000000" + this.customer_id).slice(-8);
     this.autotopup = user.get('customer', null).credit_status;
-
+    this.saldobgexp = moment(user.get('customer', null).last_update).locale("id").add(3, 'M').format('D MMMM YYYY');
     console.log(this.autotopup)
 
     http.get('http://api.blackgarlic.id:7005/app/saldobg/' + this.customer_id).map(res => res.json())
       .subscribe(data => {
         this.history = data.history;
+        this.referral_list = data.referral;
         if (data.order)
           this.nextorder = data.order.grandtotal;
         if (data.customer.balance != this.saldobg) {
@@ -56,6 +59,15 @@ export class SubsSaldoPage {
       });
   }
 
+info(){
+  let toast = this.toastCtrl.create({
+   message: 'Pastikan SaldoBG Anda cukup untuk pemotongan berikutnya',
+   duration: 2000,
+   position: 'middle'
+ });
+
+ toast.present();
+}
   topup(credit_status) {
 
     if (this.autotopup == 0) {
@@ -222,6 +234,7 @@ export class SubsSaldoPage {
     this.http.get('http://api.blackgarlic.id:7005/app/saldobg/' + this.customer_id).map(res => res.json())
       .subscribe(data => {
         this.history = data.history;
+        this.referral_list = data.referral;
         if (data.order)
           this.nextorder = data.order.grandtotal;
         if (data.customer.balance != this.saldobg) {
@@ -254,6 +267,7 @@ export class SubsSaldoPage {
       this.http.get('http://api.blackgarlic.id:7005/app/saldobg/' + this.customer_id).map(res => res.json())
         .subscribe(data => {
           this.history = data.history;
+          this.referral_list = data.referral;
           if (data.order)
             this.nextorder = data.order.grandtotal;
           if (data.customer.balance != this.saldobg) {

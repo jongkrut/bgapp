@@ -12,7 +12,8 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 import { SubsHomePage } from '../pages/subshome/subshome';
 import { HomePage } from '../pages/home/home';
-
+import * as moment from 'moment';
+import 'moment/locale/id';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
 
@@ -55,10 +56,10 @@ export class MyApp {
 
           this.mixpanel.init("e3f475813524ce395975a3b628b15773").then((data) => {
             let subs_id = 0;
-            let subs_added = 0;
+            let subs_added;
             if (userz != null) {
               subs_id = userz.subscription_id;
-              subs_added = userz.added;
+              subs_added = moment().local(userz.added);
             }
             this.mixpanelPeople.identify(userd.customer_id);
             this.mixpanelPeople.set({
@@ -69,7 +70,7 @@ export class MyApp {
               "$email": userd.customer_email,
               "$subscriptionId": subs_id,
               "$trial": userd.trial,
-              "$signup_date": userd.added,
+              "$signup_date": moment().local(userd.added),
               "$subscription_date": subs_added,
               "$referral_code": userd.customer_code
             });
@@ -130,11 +131,11 @@ export class MyApp {
 
       this.mixpanel.init("e3f475813524ce395975a3b628b15773").then((data) => {
         let subs_id = 0;
-        let subs_added = 0;
+        let subs_added;
 
         if (userz != null) {
           subs_id = userz.subscription_id;
-          subs_added = userz.added;
+          subs_added = moment().local(userz.added);
           this.registerPush(userz.subscription_id);
         }
 
@@ -147,13 +148,13 @@ export class MyApp {
           "$email": userd.customer_email,
           "$subscriptionId": subs_id,
           "$trial": userd.trial,
-          "$signup_date": userd.added,
+          "$signup_date": moment().local(userd.added),
           "$subscription_date": subs_added,
           "$referral_code": userd.customer_code
         });
 
         let signUpProperties = {
-          'Created date': userd.added,
+          'Created date': moment().local(userd.added),
           Email: userd.customer_email,
           Name: userd.first_name + ' ' + userd.last_name,
           'Tipe sign up': type
@@ -214,7 +215,7 @@ export class MyApp {
 
           this.mixpanelPeople.set({
             "$subscriptionId": subs_id,
-            "$subscription_date": subs_added
+            "$subscription_date": moment().local(subs_added)
           });
         }
 

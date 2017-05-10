@@ -17,7 +17,11 @@
         SaldoBG anda saat ini:
         <div class="saldobg_content">
           IDR {{saldobg | number :'1.0-0'}}
+          <ion-icon (click)="info()" style="float:right; font-size:25px;" name="information-circle"></ion-icon>
         </div>
+      </div>
+      <div class="saldobg_expired">
+        Masa aktif SaldoBG Anda sampai dengan <u>{{saldobgexp}}</u>
       </div>
     </div>
 
@@ -38,14 +42,14 @@
 
   <div padding-horizontal>
     <ion-segment [(ngModel)]="listtype">
-      <ion-segment-button value="autotopup">
-        Auto-Topup
-      </ion-segment-button>
-      <ion-segment-button value="topup">
-        Manual-Topup
+      <ion-segment-button style="font-size:11px;"value="autotopup">
+        Topup
       </ion-segment-button>
       <ion-segment-button value="history">
         Riwayat
+      </ion-segment-button>
+      <ion-segment-button value="referral">
+        Referral
       </ion-segment-button>
     </ion-segment>
   </div>
@@ -76,7 +80,9 @@
         <ion-col class="saldo_cont">
           <p style="text-align: center; padding:0">Kartu Anda telah tersimpan</p>
           <div class="creditcard">
-            <div><ion-icon name="checkmark-circle" style="font-size:40px;"></ion-icon></div>
+            <div>
+              <ion-icon name="checkmark-circle" style="font-size:40px;"></ion-icon>
+            </div>
             <div style="font-weight:100;margin-top:25px;">Card Number</div>
             <div>**** **** **** </div>
           </div>
@@ -111,42 +117,11 @@
         </ion-col>
       </ion-row>
     </div>
-
-    <span *ngIf="customer_code  != ''">
-      <div *ngSwitchCase="'topup'" padding class="ref_contz">
-          <ion-row style="border-bottom:1px solid white">
-              <ion-col col-6 class="ref_l">
-                Bagikan kode referral
-                dapatkan SaldoBG gratis
-              </ion-col>
-              <ion-col class="ref_c">
-                IDR 50.000
-              </ion-col>
-          </ion-row>
-      </div>
-      <div *ngSwitchCase="'topup'" padding-left padding-right padding-bottom class="ref_conty">
-          <ion-row no-padding>
-                <ion-col col-3 class="cd_l">
-                    Kode Anda
-                </ion-col>
-                <ion-col col-9 no-padding>
-                  <div class="code_cont">
-                      <ion-row no-padding>
-                        <ion-col class="code_cnt" nowrap no-padding padding-left width-67>
-                          {{customer_code}}
-                        </ion-col>
-                        <ion-col nowrap no-padding>
-                          <button class="share-btn" (click)="shareCode()">Bagikan</button>
-                        </ion-col>
-                      </ion-row>
-                  </div>
-                </ion-col>
-          </ion-row>
-      </div>
-    </span>
-
-    <ion-list *ngSwitchCase="'topup'">
-
+<br>
+    <ion-list *ngSwitchCase="'autotopup'">
+    <div class="manual">
+    <b>Manual-Topup</b>
+    </div>
       <button ng-item class="topup_div" (click)="openModalVA('bca')">
         <img src="assets/saldobg/bca.png" />
         ({{bca_va}})
@@ -169,14 +144,72 @@
 
     </ion-list>
 
+    <span *ngIf="customer_code  != ''">
+      <div *ngSwitchCase="'referral'" padding class="ref_contz">
+          <ion-row style="border-bottom:1px solid white">
+              <ion-col col-6 class="ref_l">
+                Bagikan kode referral
+                dapatkan SaldoBG gratis
+              </ion-col>
+              <ion-col class="ref_c">
+                IDR 50.000
+              </ion-col>
+          </ion-row>
+      </div>
+      <div *ngSwitchCase="'referral'" padding-left padding-right padding-bottom class="ref_conty">
+          <ion-row no-padding>
+                <ion-col col-3 class="cd_l">
+                    Kode Anda
+                </ion-col>
+                <ion-col col-9 no-padding>
+                  <div class="code_cont">
+                      <ion-row no-padding>
+                        <ion-col class="code_cnt" nowrap no-padding padding-left width-67>
+                          {{customer_code}}
+                        </ion-col>
+                        <ion-col nowrap no-padding>
+                          <button class="share-btn" (click)="shareCode()">Bagikan</button>
+                        </ion-col>
+                      </ion-row>
+                  </div>
+                </ion-col>
+          </ion-row>
+      </div>
+    </span>
 
+    <ion-list *ngSwitchCase="'referral'">
+      <table>
+        <tr>
+          <th>Nama</th>
+          <th>Email</th>
+          <th>Tanggal</th>
+        </tr>
+        <tr *ngIf="referral_list == ''">
+          <td colspan="3">Belum ada teman yang mengggunakan kode Anda</td>
+        </tr>
+        <tr *ngFor="let ref of referral_list">
+          <td>
+            {{ref.first_name}} {{ref.last_name}}
+          </td>
+          <td>
+            {{ref.customer_email}}
+          </td>
+          <td>
+            {{ref.datetime | date : 'y-MM-dd'}}<br/> {{ref.datetime | date : 'HH:mm'}}
+          </td>
+        </tr>
+      </table>
+    </ion-list>
 
-    <ion-list *ngSwitchCase="'history'">
+    <ion-list *ngSwitchCase="'history'" style="margin-top: -30px;">
       <table>
         <tr>
           <th>Tanggal</th>
           <th>Nominal</th>
           <th>Saldo Sebelum</th>
+        </tr>
+        <tr *ngIf="history == ''">
+          <td colspan="3">Belum ada transaksi</td>
         </tr>
         <tr *ngFor="let hist of history">
           <td>

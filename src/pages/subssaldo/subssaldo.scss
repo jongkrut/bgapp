@@ -19,6 +19,19 @@ page-subssaldo {
     color:#666;
     font-size:12px;
   }
+  .manual {
+    font-size:14px;
+    margin-top: 10px;
+    margin-bottom: 9px;
+    text-align: center;
+    color:#666;
+  }
+  .saldobg_expired {
+    border-radius:5px;
+    color:#fafafa;
+    font-size:11px;
+    margin-top: 10px;
+  }
   .autotopup_cont {
     background-color: rgba(255,255,255,0.9);
     color:#666;
@@ -41,6 +54,7 @@ page-subssaldo {
     background-color: #2b2b2b;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+    margin-top: -30px
   }
   .ref_conty {
     background-color: #2b2b2b;

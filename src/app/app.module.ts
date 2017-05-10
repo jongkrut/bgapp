@@ -21,6 +21,7 @@ import { SubsHomePage, SubsMenuPage } from '../pages/subshome/subshome';
 import { SubsOrderPage, EditOrderAddress } from '../pages/subsorder/subsorder';
 import { SubsSaldoPage } from '../pages/subssaldo/subssaldo';
 import { SubsProfilePage, SubsEditPage,SubsProfileEditPage } from '../pages/subsprofile/subsprofile';
+//import { SubsHistoryPage } from '../pages/subshistory/subshistory';
 
 import { SaldoVAPage,SaldoBrowserPage } from '../pages/subssaldo/saldova';
 import { SignupPage } from '../pages/signup/signup';
@@ -68,7 +69,7 @@ const cloudSettings: CloudSettings = {
     AuthPage, SubsProfilePage, SubsEditPage, SubsProfileEditPage, SubsMenuPage, WelcomePage,
     MenuPage, DetailModal,ProfilePage, EditProfile, HowitworksPage, HowModal, WhyModal,
     HomePage, SubsHomePage, EditOrderPage, FeedbackPage, WalkthroughPage,
-    SubsOrderPage,EditOrderAddress, SubsSaldoPage, DaftarPage,
+    SubsOrderPage,EditOrderAddress, SubsSaldoPage, DaftarPage, /*SubsHistoryPage,*/
     SignupPage, SaldoVAPage, SaldoBrowserPage,
     Subsstep1Page, Subsstep2Page,Subsstep3Page, SubssummaryPage, SubsthanksPage,
     TrialStep1Page, TrialStep2Page, TrialStep3Page, TrialStep4Page, TrialthanksPage
@@ -92,7 +93,7 @@ const cloudSettings: CloudSettings = {
     AuthPage, SubsProfilePage, SubsEditPage, SubsProfileEditPage, SubsMenuPage, WelcomePage,
     MenuPage, DetailModal,ProfilePage, EditProfile, HowitworksPage, HowModal, WhyModal,
     HomePage, SubsHomePage, EditOrderPage, FeedbackPage, WalkthroughPage,
-    SubsOrderPage,EditOrderAddress, SubsSaldoPage, DaftarPage,
+    SubsOrderPage,EditOrderAddress, SubsSaldoPage, DaftarPage, /*SubsHistoryPage,*/
     SignupPage, SaldoVAPage, SaldoBrowserPage,
     Subsstep1Page, Subsstep2Page,Subsstep3Page, SubssummaryPage, SubsthanksPage,
     TrialStep1Page, TrialStep2Page, TrialStep3Page, TrialStep4Page, TrialthanksPage

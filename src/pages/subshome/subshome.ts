@@ -8,6 +8,7 @@ import { MenuPage } from '../menu/menu';
 import { SubsOrderPage } from '../subsorder/subsorder';
 import { SubsSaldoPage } from '../subssaldo/subssaldo';
 import { SubsProfilePage } from '../subsprofile/subsprofile';
+//import { SubsHistoryPage } from '../subshistory/subshistory';
 import { ProfilePage } from '../profile/profile';
 import { WelcomePage } from '../welcome/welcome';
 import { FeedbackPage } from '../feedback/feedback';
@@ -113,6 +114,7 @@ export class SubsMenuPage {
       this.pages = [
           { title: 'Akun Saya', component: ProfilePage, icon: "contact" },
           { title: 'Profil Langganan', component: SubsProfilePage, icon: "folder"},
+        //  { title: 'Riwayat Langganan', component: SubsHistoryPage, icon: "bookmarks"}
       ];
     } else {
       this.pages = [
