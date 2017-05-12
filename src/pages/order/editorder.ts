@@ -26,30 +26,30 @@ export class EditOrderPage {
       });
       loading.present();
 
-      platform.registerBackButtonAction(() => {
+//       platform.registerBackButtonAction(() => {
 
-        let ttl = "Anda ingin kembali?";
-        let msg = "Perubahan data Anda tidak akan tersimpan.";
+//         let ttl = "Anda ingin kembali?";
+//         let msg = "Perubahan data Anda tidak akan tersimpan.";
 
-        let alert = this.alertCtrl.create({
-          title: ttl,
-          message: msg,
-          buttons: [
-            {
-              text: 'Batal',
-              role: 'cancel',
-              handler: () => {
-                console.log('Cancel clicked');
-              }
-            }, {
-              text: 'Ya',
-              handler: () => {
-                this.navCtrl.setRoot(SubsHomePage, { tabs: 1 });
-              }
-            }]
-        });
-        alert.present();
-       });
+//         let alert = this.alertCtrl.create({
+//           title: ttl,
+//           message: msg,
+//           buttons: [
+//             {
+//               text: 'Batal',
+//               role: 'cancel',
+//               handler: () => {
+//                 console.log('Cancel clicked');
+//               }
+//             }, {
+//               text: 'Ya',
+//               handler: () => {
+//                 this.navCtrl.setRoot(SubsHomePage, { tabs: 1 });
+//               }
+//             }]
+//         });
+//         alert.present();
+//        });
 
 
 
