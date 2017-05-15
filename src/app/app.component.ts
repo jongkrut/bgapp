@@ -57,9 +57,12 @@ export class MyApp {
           this.mixpanel.init("e3f475813524ce395975a3b628b15773").then((data) => {
             let subs_id = 0;
             let subs_added;
+            let subs_status = 0;
+
             if (userz != null) {
               subs_id = userz.subscription_id;
               subs_added = moment().local(userz.added);
+              subs_status = userd.subscription_status;
             }
             this.mixpanelPeople.identify(userd.customer_id);
             this.mixpanelPeople.set({
@@ -72,6 +75,7 @@ export class MyApp {
               "$trial": userd.trial,
               "$signup_date": moment().local(userd.added),
               "$subscription_date": subs_added,
+              "$subscription_status" : subs_status,
               "$referral_code": userd.customer_code
             });
           });
@@ -132,11 +136,13 @@ export class MyApp {
       this.mixpanel.init("e3f475813524ce395975a3b628b15773").then((data) => {
         let subs_id = 0;
         let subs_added;
+        let subs_status = 0;
 
         if (userz != null) {
           subs_id = userz.subscription_id;
           subs_added = moment().local(userz.added);
           this.registerPush(userz.subscription_id);
+          subs_status = userd.subscription_status;
         }
 
         this.mixpanelPeople.identify(userd.customer_id);
@@ -150,6 +156,7 @@ export class MyApp {
           "$trial": userd.trial,
           "$signup_date": moment().local(userd.added),
           "$subscription_date": subs_added,
+          "$subscription_status" : subs_status,
           "$referral_code": userd.customer_code
         });
 
@@ -212,10 +219,12 @@ export class MyApp {
         if (userz) {
           let subs_id = userz.subscription_id;
           let subs_added = userz.added;
+          let subs_status = userd.subscription_status;
 
           this.mixpanelPeople.set({
             "$subscriptionId": subs_id,
-            "$subscription_date": moment().local(subs_added)
+            "$subscription_date": moment().local(subs_added),
+            "$subscription_status" : subs_status
           });
         }
 
