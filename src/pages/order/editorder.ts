@@ -45,6 +45,7 @@ export class EditOrderPage {
             this.carttotal += menu[i].count;
             this.cart.push({ menu_id: m.menu_id, menu_name: m.menu_name, menu_type: m.menu_type, menu_prices: m.menu_prices });
             break;
+
           }
           if (i == (menu.length - 1)) {
             this.menus.push({ menu_id: m.menu_id, menu_name: m.menu_name, menu_type: m.menu_type, menu_prices: m.menu_prices });
@@ -118,27 +119,27 @@ export class EditOrderPage {
     let ttl = "Anda ingin kembali?";
     let msg = "Perubahan data Anda tidak akan tersimpan.";
 
-      console.log('lol')
+    console.log('lol')
     this.alert = this.alertCtrl.create({
-        title: ttl,
-        message: msg,
-        buttons: [
-          {
-            text: 'Batal',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
-          }, {
-            text: 'Ya',
-            handler: () => {
-              this.navCtrl.setRoot(SubsHomePage, { tabs: 1 });
-            }
-          }]
-      });
+      title: ttl,
+      message: msg,
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }, {
+          text: 'Ya',
+          handler: () => {
+            this.navCtrl.setRoot(SubsHomePage, { tabs: 1 });
+          }
+        }]
+    });
 
-      this.alert.present();
-    }
+    this.alert.present();
+  }
 
   saveOrder() {
     let customer = this.user.get("customer", null);
@@ -169,13 +170,13 @@ export class EditOrderPage {
   }
 
   ionViewWillLeave() {
-     this.unregisterBackButtonAction && this.unregisterBackButtonAction();
+    this.unregisterBackButtonAction && this.unregisterBackButtonAction();
   }
 
   public initializeBackButtonCustomHandler(): void {
-        this.unregisterBackButtonAction = this.platform.registerBackButtonAction(() => {
-            this.goBack();
-        }, 10);
-    }
+    this.unregisterBackButtonAction = this.platform.registerBackButtonAction(() => {
+      this.goBack();
+    }, 10);
+  }
 
 }
