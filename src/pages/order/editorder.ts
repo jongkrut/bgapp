@@ -119,7 +119,6 @@ export class EditOrderPage {
     let ttl = "Anda ingin kembali?";
     let msg = "Perubahan data Anda tidak akan tersimpan.";
 
-    console.log('lol')
     this.alert = this.alertCtrl.create({
       title: ttl,
       message: msg,
